@@ -13,7 +13,7 @@ jobs:
           - '7.2'
           - '7.3'
           - '7.4'
-    container: ghcr.io/articus/gha-phpdbg:${{ matrix.php }}_2020-12-06
+    container: ghcr.io/articus/phpdbg:${{ matrix.php }}_2020-12-06
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
