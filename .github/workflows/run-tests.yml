@@ -18,6 +18,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Debug current folder
+        run: |
+          ls -al
+          pwd -P
+          echo $GITHUB_WORKSPACE
+          cd $GITHUB_WORKSPACE
+
       - name: Replace composer.lock for PHP 7.1
         if: matrix.php == '7.1'
         run: cp ./composer.lock.7.1 ./composer.lock
