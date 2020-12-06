@@ -35,6 +35,7 @@ use function Eloquent\Phony\Kahlan\mock;
 			$obj = new OAGC\Validator\Scalar(['type' => OAGC\Validator\Scalar::TYPE_INT]);
 			$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting int.'];
 
+			\expect($obj->validate(null))->toBe([]);
 			\expect($obj->validate([]))->toBe($error);
 			\expect($obj->validate(false))->toBe($error);
 			\expect($obj->validate(true))->toBe($error);
@@ -65,6 +66,7 @@ use function Eloquent\Phony\Kahlan\mock;
 			$obj = new OAGC\Validator\Scalar(['type' => OAGC\Validator\Scalar::TYPE_FLOAT]);
 			$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting float.'];
 
+			\expect($obj->validate(null))->toBe([]);
 			\expect($obj->validate([]))->toBe($error);
 			\expect($obj->validate(false))->toBe($error);
 			\expect($obj->validate(true))->toBe($error);
@@ -95,6 +97,7 @@ use function Eloquent\Phony\Kahlan\mock;
 			$obj = new OAGC\Validator\Scalar(['type' => OAGC\Validator\Scalar::TYPE_BOOL]);
 			$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting bool.'];
 
+			\expect($obj->validate(null))->toBe([]);
 			\expect($obj->validate([]))->toBe($error);
 			\expect($obj->validate(false))->toBe([]);
 			\expect($obj->validate(true))->toBe([]);
@@ -125,6 +128,7 @@ use function Eloquent\Phony\Kahlan\mock;
 			$obj = new OAGC\Validator\Scalar(['type' => OAGC\Validator\Scalar::TYPE_STRING]);
 			$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting string.'];
 
+			\expect($obj->validate(null))->toBe([]);
 			\expect($obj->validate([]))->toBe($error);
 			\expect($obj->validate(false))->toBe($error);
 			\expect($obj->validate(true))->toBe($error);

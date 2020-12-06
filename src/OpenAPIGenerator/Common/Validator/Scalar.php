@@ -43,7 +43,7 @@ class Scalar implements ValidatorInterface
 	public function validate($data): array
 	{
 		$result = [];
-		if (!$this->hasValidType($data))
+		if (($data !== null) && (!$this->hasValidType($data)))
 		{
 			$result[self::ERROR_INVALID_TYPE] = $this->getInvalidTypeMessage();
 		}

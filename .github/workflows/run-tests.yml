@@ -1,0 +1,41 @@
+name: Run tests
+on:
+  - push
+  - pull_request
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php:
+          - '7.1'
+          - '7.2'
+          - '7.3'
+          - '7.4'
+    container: ghcr.io/articus/gha-phpdbg:${{ matrix.php }}_2020-12-06
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Replace composer.lock for PHP 7.1
+        if: matrix.php == '7.1'
+        run: cp ./composer.lock.7.1 ./composer.lock
+
+      - name: Replace composer.lock for PHP 7.2
+        if: matrix.php == '7.2'
+        run: cp ./composer.lock.7.2 ./composer.lock
+
+      - name: Install dependencies via Composer
+        run: php ./composer.phar --no-interaction --no-progress --no-suggest --classmap-authoritative
+
+      - name: Run Kahlan tests
+        run: |
+          mkdir -p ./spec_output
+          phpdbg -qrr ./vendor/kahlan/kahlan/bin/kahlan
+
+      - name: Upload coverage to coveralls.io
+        if: matrix.php == '7.4'
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

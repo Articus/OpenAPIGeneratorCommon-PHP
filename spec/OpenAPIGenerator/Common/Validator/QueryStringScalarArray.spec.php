@@ -105,6 +105,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of int.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate([]))->toBe([]);
 					\expect($obj->validate(['false', 'true']))->toBe($error);
 					\expect($obj->validate(['0', '123', '-123']))->toBe([]);
@@ -119,6 +120,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of float.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate([]))->toBe([]);
 					\expect($obj->validate(['false', 'true']))->toBe($error);
 					\expect($obj->validate(['0', '123', '-123']))->toBe([]);
@@ -133,6 +135,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of bool.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate([]))->toBe([]);
 					\expect($obj->validate(['false', 'true']))->toBe([]);
 					\expect($obj->validate(['0', '123', '-123']))->toBe($error);
@@ -147,6 +150,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of string.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate([]))->toBe([]);
 					\expect($obj->validate(['false', 'true']))->toBe([]);
 					\expect($obj->validate(['0', '123', '-123']))->toBe([]);
@@ -164,6 +168,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of int.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate(''))->toBe([]);
 					\expect($obj->validate('false,true'))->toBe($error);
 					\expect($obj->validate('0,123,-123'))->toBe([]);
@@ -178,6 +183,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of float.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate(''))->toBe([]);
 					\expect($obj->validate('false,true'))->toBe($error);
 					\expect($obj->validate('0,123,-123'))->toBe([]);
@@ -192,6 +198,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of bool.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate(''))->toBe([]);
 					\expect($obj->validate('false,true'))->toBe([]);
 					\expect($obj->validate('0,123,-123'))->toBe($error);
@@ -206,6 +213,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of string.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate(''))->toBe([]);
 					\expect($obj->validate('false,true'))->toBe([]);
 					\expect($obj->validate('0,123,-123'))->toBe([]);
@@ -223,6 +231,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of int.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate(''))->toBe([]);
 					\expect($obj->validate('false true'))->toBe($error);
 					\expect($obj->validate('0 123 -123'))->toBe([]);
@@ -237,6 +246,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of float.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate(''))->toBe([]);
 					\expect($obj->validate('false true'))->toBe($error);
 					\expect($obj->validate('0 123 -123'))->toBe([]);
@@ -251,6 +261,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of bool.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate(''))->toBe([]);
 					\expect($obj->validate('false true'))->toBe([]);
 					\expect($obj->validate('0 123 -123'))->toBe($error);
@@ -265,6 +276,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of string.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate(''))->toBe([]);
 					\expect($obj->validate('false true'))->toBe([]);
 					\expect($obj->validate('0 123 -123'))->toBe([]);
@@ -282,6 +294,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of int.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate(''))->toBe([]);
 					\expect($obj->validate("false\ttrue"))->toBe($error);
 					\expect($obj->validate("0\t123\t-123"))->toBe([]);
@@ -296,6 +309,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of float.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate(''))->toBe([]);
 					\expect($obj->validate("false\ttrue"))->toBe($error);
 					\expect($obj->validate("0\t123\t-123"))->toBe([]);
@@ -310,6 +324,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of bool.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate(''))->toBe([]);
 					\expect($obj->validate("false\ttrue"))->toBe([]);
 					\expect($obj->validate("0\t123\t-123"))->toBe($error);
@@ -324,6 +339,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of string.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate(''))->toBe([]);
 					\expect($obj->validate("false\ttrue"))->toBe([]);
 					\expect($obj->validate("0\t123\t-123"))->toBe([]);
@@ -341,6 +357,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of int.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate(''))->toBe([]);
 					\expect($obj->validate('false|true'))->toBe($error);
 					\expect($obj->validate('0|123|-123'))->toBe([]);
@@ -355,6 +372,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of float.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate(''))->toBe([]);
 					\expect($obj->validate('false|true'))->toBe($error);
 					\expect($obj->validate('0|123|-123'))->toBe([]);
@@ -369,6 +387,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of bool.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate(''))->toBe([]);
 					\expect($obj->validate('false|true'))->toBe([]);
 					\expect($obj->validate('0|123|-123'))->toBe($error);
@@ -383,6 +402,7 @@ use OpenAPIGenerator\Common as OAGC;
 					]);
 					$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid type: expecting list of string.'];
 
+					\expect($obj->validate(null))->toBe([]);
 					\expect($obj->validate(''))->toBe([]);
 					\expect($obj->validate('false|true'))->toBe([]);
 					\expect($obj->validate('0|123|-123'))->toBe([]);
