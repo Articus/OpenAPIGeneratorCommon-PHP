@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace OpenAPIGenerator\Common\Strategy;
 
+use Articus\DataTransfer\Exception as DTException;
 use OpenAPIGenerator\Common\Validator;
 
 class QueryStringScalarArray extends QueryStringScalar
@@ -33,10 +34,13 @@ class QueryStringScalarArray extends QueryStringScalar
 		{
 			if (!\is_array($from))
 			{
-				throw new \InvalidArgumentException(\sprintf(
-					'Extraction can be done only from array, not %s',
-					\is_object($from) ? \get_class($from) : \gettype($from)
-				));
+				throw new DTException\InvalidData(
+					DTException\InvalidData::DEFAULT_VIOLATION,
+					new \InvalidArgumentException(\sprintf(
+						'Extraction can be done only from array, not %s',
+						\is_object($from) ? \get_class($from) : \gettype($from)
+					))
+				);
 			}
 			$list = [];
 			foreach ($from as $index => $item)
@@ -44,9 +48,12 @@ class QueryStringScalarArray extends QueryStringScalar
 				$extractedItem = parent::extract($item);
 				if (($this->delimiter !== null) && (\strpos($extractedItem, $this->delimiter) !== false))
 				{
-					throw new \InvalidArgumentException(\sprintf(
-						'Item at index %s contains delimiter symbol and should be encoded.', $index
-					));
+					throw new DTException\InvalidData(
+						DTException\InvalidData::DEFAULT_VIOLATION,
+						new \InvalidArgumentException(
+							\sprintf('Item at index %s contains delimiter symbol and should be encoded.', $index)
+						)
+					);
 				}
 				$list[$index] = $extractedItem;
 			}
@@ -67,10 +74,13 @@ class QueryStringScalarArray extends QueryStringScalar
 			{
 				if (!\is_array($from))
 				{
-					throw new \InvalidArgumentException(\sprintf(
-						'Hydration can be done only from array, not %s',
-						\is_object($from) ? \get_class($from) : \gettype($from)
-					));
+					throw new DTException\InvalidData(
+						DTException\InvalidData::DEFAULT_VIOLATION,
+						new \InvalidArgumentException(\sprintf(
+							'Hydration can be done only from array, not %s',
+							\is_object($from) ? \get_class($from) : \gettype($from)
+						))
+					);
 				}
 				$list = $from;
 			}
@@ -78,10 +88,13 @@ class QueryStringScalarArray extends QueryStringScalar
 			{
 				if (!\is_string($from))
 				{
-					throw new \InvalidArgumentException(\sprintf(
-						'Hydration can be done only from string, not %s',
-						\is_object($from) ? \get_class($from) : \gettype($from)
-					));
+					throw new DTException\InvalidData(
+						DTException\InvalidData::DEFAULT_VIOLATION,
+						new \InvalidArgumentException(\sprintf(
+							'Hydration can be done only from string, not %s',
+							\is_object($from) ? \get_class($from) : \gettype($from)
+						))
+					);
 				}
 				//TODO allow to choose how to treat '' for strings - as [] (same other types) or ['']
 				$list = ($from === '') ? [] : \explode($this->delimiter, $from);

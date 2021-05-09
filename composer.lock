@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "articus/data-transfer",
-            "version": "0.5",
+            "version": "0.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Articus/DataTransfer.git",
-                "reference": "0f9618ee9407c1df49cd26b552a62485e31d073e"
+                "reference": "dea55a2482d93856c14674b14dec84f62884d5bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Articus/DataTransfer/zipball/0f9618ee9407c1df49cd26b552a62485e31d073e",
-                "reference": "0f9618ee9407c1df49cd26b552a62485e31d073e",
+                "url": "https://api.github.com/repos/Articus/DataTransfer/zipball/dea55a2482d93856c14674b14dec84f62884d5bb",
+                "reference": "dea55a2482d93856c14674b14dec84f62884d5bb",
                 "shasum": ""
             },
             "require": {
@@ -69,9 +69,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Articus/DataTransfer/issues",
-                "source": "https://github.com/Articus/DataTransfer/tree/0.5"
+                "source": "https://github.com/Articus/DataTransfer/tree/0.5.1"
             },
-            "time": "2021-03-21T19:49:06+00:00"
+            "time": "2021-05-09T11:33:47+00:00"
         },
         {
             "name": "container-interop/container-interop",

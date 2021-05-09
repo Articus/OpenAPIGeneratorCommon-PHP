@@ -38,11 +38,6 @@ class Scalar implements StrategyInterface
 
 	public function hydrate($from, &$to): void
 	{
-		$this->merge($from, $to);
-	}
-
-	public function merge($from, &$to): void
-	{
 		if ($from !== null)
 		{
 			switch ($this->type)
@@ -65,5 +60,10 @@ class Scalar implements StrategyInterface
 		{
 			$to = null;
 		}
+	}
+
+	public function merge($from, &$to): void
+	{
+		$to = $from;
 	}
 }

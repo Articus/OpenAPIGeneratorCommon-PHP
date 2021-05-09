@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace spec\OpenAPIGenerator\Common\Strategy;
 
+use Articus\DataTransfer\Exception as DTException;
 use OpenAPIGenerator\Common as OAGC;
 
 \describe(OAGC\Strategy\QueryStringScalarArray::class, function ()
@@ -50,15 +51,21 @@ use OpenAPIGenerator\Common as OAGC;
 	{
 		\it('throws on non array', function ()
 		{
-			$exception = new \InvalidArgumentException('Extraction can be done only from array, not integer');
-			\expect(function ()
+			$strategy = new OAGC\Strategy\QueryStringScalarArray([
+				'type' => OAGC\Validator\QueryStringScalarArray::TYPE_INT,
+				'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_MULTI,
+			]);
+			try
 			{
-				$strategy = new OAGC\Strategy\QueryStringScalarArray([
-					'type' => OAGC\Validator\QueryStringScalarArray::TYPE_INT,
-					'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_MULTI,
-				]);
 				$strategy->extract(123);
-			})->toThrow($exception);
+				throw new \LogicException('No expected exception');
+			}
+			catch (DTException\InvalidData $e)
+			{
+				\expect($e->getViolations())->toBe(DTException\InvalidData::DEFAULT_VIOLATION);
+				\expect($e->getPrevious())->toBeAnInstanceOf(\InvalidArgumentException::class);
+				\expect($e->getPrevious()->getMessage())->toBe('Extraction can be done only from array, not integer');
+			}
 		});
 		\context('no separator', function ()
 		{
@@ -147,15 +154,21 @@ use OpenAPIGenerator\Common as OAGC;
 			});
 			\it('throws if string contains ","', function ()
 			{
-				$exception = new \InvalidArgumentException('Item at index 0 contains delimiter symbol and should be encoded.');
-				\expect(function ()
+				$strategy = new OAGC\Strategy\QueryStringScalarArray([
+					'type' => OAGC\Validator\QueryStringScalarArray::TYPE_STRING,
+					'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_CSV,
+				]);
+				try
 				{
-					$strategy = new OAGC\Strategy\QueryStringScalarArray([
-						'type' => OAGC\Validator\QueryStringScalarArray::TYPE_STRING,
-						'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_CSV,
-					]);
 					$strategy->extract(['abc,def']);
-				})->toThrow($exception);
+					throw new \LogicException('No expected exception');
+				}
+				catch (DTException\InvalidData $e)
+				{
+					\expect($e->getViolations())->toBe(DTException\InvalidData::DEFAULT_VIOLATION);
+					\expect($e->getPrevious())->toBeAnInstanceOf(\InvalidArgumentException::class);
+					\expect($e->getPrevious()->getMessage())->toBe('Item at index 0 contains delimiter symbol and should be encoded.');
+				}
 			});
 		});
 		\context('" " separator', function ()
@@ -202,15 +215,21 @@ use OpenAPIGenerator\Common as OAGC;
 			});
 			\it('throws if string contains " "', function ()
 			{
-				$exception = new \InvalidArgumentException('Item at index 0 contains delimiter symbol and should be encoded.');
-				\expect(function ()
+				$strategy = new OAGC\Strategy\QueryStringScalarArray([
+					'type' => OAGC\Validator\QueryStringScalarArray::TYPE_STRING,
+					'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_SSV,
+				]);
+				try
 				{
-					$strategy = new OAGC\Strategy\QueryStringScalarArray([
-						'type' => OAGC\Validator\QueryStringScalarArray::TYPE_STRING,
-						'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_SSV,
-					]);
 					$strategy->extract(['abc def']);
-				})->toThrow($exception);
+					throw new \LogicException('No expected exception');
+				}
+				catch (DTException\InvalidData $e)
+				{
+					\expect($e->getViolations())->toBe(DTException\InvalidData::DEFAULT_VIOLATION);
+					\expect($e->getPrevious())->toBeAnInstanceOf(\InvalidArgumentException::class);
+					\expect($e->getPrevious()->getMessage())->toBe('Item at index 0 contains delimiter symbol and should be encoded.');
+				}
 			});
 		});
 		\context('"\t" separator', function ()
@@ -257,15 +276,21 @@ use OpenAPIGenerator\Common as OAGC;
 			});
 			\it('throws if string contains "\t"', function ()
 			{
-				$exception = new \InvalidArgumentException('Item at index 0 contains delimiter symbol and should be encoded.');
-				\expect(function ()
+				$strategy = new OAGC\Strategy\QueryStringScalarArray([
+					'type' => OAGC\Validator\QueryStringScalarArray::TYPE_STRING,
+					'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_TSV,
+				]);
+				try
 				{
-					$strategy = new OAGC\Strategy\QueryStringScalarArray([
-						'type' => OAGC\Validator\QueryStringScalarArray::TYPE_STRING,
-						'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_TSV,
-					]);
 					$strategy->extract(["abc\tdef"]);
-				})->toThrow($exception);
+					throw new \LogicException('No expected exception');
+				}
+				catch (DTException\InvalidData $e)
+				{
+					\expect($e->getViolations())->toBe(DTException\InvalidData::DEFAULT_VIOLATION);
+					\expect($e->getPrevious())->toBeAnInstanceOf(\InvalidArgumentException::class);
+					\expect($e->getPrevious()->getMessage())->toBe('Item at index 0 contains delimiter symbol and should be encoded.');
+				}
 			});
 		});
 		\context('"|" separator', function ()
@@ -312,15 +337,21 @@ use OpenAPIGenerator\Common as OAGC;
 			});
 			\it('throws if string contains "|"', function ()
 			{
-				$exception = new \InvalidArgumentException('Item at index 0 contains delimiter symbol and should be encoded.');
-				\expect(function ()
+				$strategy = new OAGC\Strategy\QueryStringScalarArray([
+					'type' => OAGC\Validator\QueryStringScalarArray::TYPE_STRING,
+					'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_PIPES,
+				]);
+				try
 				{
-					$strategy = new OAGC\Strategy\QueryStringScalarArray([
-						'type' => OAGC\Validator\QueryStringScalarArray::TYPE_STRING,
-						'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_PIPES,
-					]);
 					$strategy->extract(['abc|def']);
-				})->toThrow($exception);
+					throw new \LogicException('No expected exception');
+				}
+				catch (DTException\InvalidData $e)
+				{
+					\expect($e->getViolations())->toBe(DTException\InvalidData::DEFAULT_VIOLATION);
+					\expect($e->getPrevious())->toBeAnInstanceOf(\InvalidArgumentException::class);
+					\expect($e->getPrevious()->getMessage())->toBe('Item at index 0 contains delimiter symbol and should be encoded.');
+				}
 			});
 		});
 	});
@@ -330,16 +361,22 @@ use OpenAPIGenerator\Common as OAGC;
 		{
 			\it('throws on non array', function ()
 			{
-				$exception = new \InvalidArgumentException('Hydration can be done only from array, not integer');
-				\expect(function ()
+				$strategy = new OAGC\Strategy\QueryStringScalarArray([
+					'type' => OAGC\Validator\QueryStringScalarArray::TYPE_INT,
+					'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_MULTI,
+				]);
+				try
 				{
 					$result = null;
-					$strategy = new OAGC\Strategy\QueryStringScalarArray([
-						'type' => OAGC\Validator\QueryStringScalarArray::TYPE_INT,
-						'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_MULTI,
-					]);
 					$strategy->hydrate(123, $result);
-				})->toThrow($exception);
+					throw new \LogicException('No expected exception');
+				}
+				catch (DTException\InvalidData $e)
+				{
+					\expect($e->getViolations())->toBe(DTException\InvalidData::DEFAULT_VIOLATION);
+					\expect($e->getPrevious())->toBeAnInstanceOf(\InvalidArgumentException::class);
+					\expect($e->getPrevious()->getMessage())->toBe('Hydration can be done only from array, not integer');
+				}
 			});
 			\it('hydrates nullable integer list', function ()
 			{
@@ -402,16 +439,22 @@ use OpenAPIGenerator\Common as OAGC;
 		{
 			\it('throws on non string', function ()
 			{
-				$exception = new \InvalidArgumentException('Hydration can be done only from string, not integer');
-				\expect(function ()
+				$strategy = new OAGC\Strategy\QueryStringScalarArray([
+					'type' => OAGC\Validator\QueryStringScalarArray::TYPE_INT,
+					'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_CSV,
+				]);
+				try
 				{
 					$result = null;
-					$strategy = new OAGC\Strategy\QueryStringScalarArray([
-						'type' => OAGC\Validator\QueryStringScalarArray::TYPE_INT,
-						'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_CSV,
-					]);
 					$strategy->hydrate(123, $result);
-				})->toThrow($exception);
+					throw new \LogicException('No expected exception');
+				}
+				catch (DTException\InvalidData $e)
+				{
+					\expect($e->getViolations())->toBe(DTException\InvalidData::DEFAULT_VIOLATION);
+					\expect($e->getPrevious())->toBeAnInstanceOf(\InvalidArgumentException::class);
+					\expect($e->getPrevious()->getMessage())->toBe('Hydration can be done only from string, not integer');
+				}
 			});
 			\it('hydrates nullable integer list', function ()
 			{
@@ -474,16 +517,22 @@ use OpenAPIGenerator\Common as OAGC;
 		{
 			\it('throws on non string', function ()
 			{
-				$exception = new \InvalidArgumentException('Hydration can be done only from string, not integer');
-				\expect(function ()
+				$strategy = new OAGC\Strategy\QueryStringScalarArray([
+					'type' => OAGC\Validator\QueryStringScalarArray::TYPE_INT,
+					'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_SSV,
+				]);
+				try
 				{
 					$result = null;
-					$strategy = new OAGC\Strategy\QueryStringScalarArray([
-						'type' => OAGC\Validator\QueryStringScalarArray::TYPE_INT,
-						'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_SSV,
-					]);
 					$strategy->hydrate(123, $result);
-				})->toThrow($exception);
+					throw new \LogicException('No expected exception');
+				}
+				catch (DTException\InvalidData $e)
+				{
+					\expect($e->getViolations())->toBe(DTException\InvalidData::DEFAULT_VIOLATION);
+					\expect($e->getPrevious())->toBeAnInstanceOf(\InvalidArgumentException::class);
+					\expect($e->getPrevious()->getMessage())->toBe('Hydration can be done only from string, not integer');
+				}
 			});
 			\it('hydrates nullable integer list', function ()
 			{
@@ -546,16 +595,22 @@ use OpenAPIGenerator\Common as OAGC;
 		{
 			\it('throws on non string', function ()
 			{
-				$exception = new \InvalidArgumentException('Hydration can be done only from string, not integer');
-				\expect(function ()
+				$strategy = new OAGC\Strategy\QueryStringScalarArray([
+					'type' => OAGC\Validator\QueryStringScalarArray::TYPE_INT,
+					'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_TSV,
+				]);
+				try
 				{
 					$result = null;
-					$strategy = new OAGC\Strategy\QueryStringScalarArray([
-						'type' => OAGC\Validator\QueryStringScalarArray::TYPE_INT,
-						'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_TSV,
-					]);
 					$strategy->hydrate(123, $result);
-				})->toThrow($exception);
+					throw new \LogicException('No expected exception');
+				}
+				catch (DTException\InvalidData $e)
+				{
+					\expect($e->getViolations())->toBe(DTException\InvalidData::DEFAULT_VIOLATION);
+					\expect($e->getPrevious())->toBeAnInstanceOf(\InvalidArgumentException::class);
+					\expect($e->getPrevious()->getMessage())->toBe('Hydration can be done only from string, not integer');
+				}
 			});
 			\it('hydrates nullable integer list', function ()
 			{
@@ -618,16 +673,22 @@ use OpenAPIGenerator\Common as OAGC;
 		{
 			\it('throws on non string', function ()
 			{
-				$exception = new \InvalidArgumentException('Hydration can be done only from string, not integer');
-				\expect(function ()
+				$strategy = new OAGC\Strategy\QueryStringScalarArray([
+					'type' => OAGC\Validator\QueryStringScalarArray::TYPE_INT,
+					'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_PIPES,
+				]);
+				try
 				{
 					$result = null;
-					$strategy = new OAGC\Strategy\QueryStringScalarArray([
-						'type' => OAGC\Validator\QueryStringScalarArray::TYPE_INT,
-						'format' => OAGC\Validator\QueryStringScalarArray::FORMAT_PIPES,
-					]);
 					$strategy->hydrate(123, $result);
-				})->toThrow($exception);
+					throw new \LogicException('No expected exception');
+				}
+				catch (DTException\InvalidData $e)
+				{
+					\expect($e->getViolations())->toBe(DTException\InvalidData::DEFAULT_VIOLATION);
+					\expect($e->getPrevious())->toBeAnInstanceOf(\InvalidArgumentException::class);
+					\expect($e->getPrevious()->getMessage())->toBe('Hydration can be done only from string, not integer');
+				}
 			});
 			\it('hydrates nullable integer list', function ()
 			{

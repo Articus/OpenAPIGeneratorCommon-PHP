@@ -95,10 +95,46 @@ use spec\Example;
 		$valueStrategy->shouldReceive('extract')->with($source[2])->andReturn($destination[2])->twice();
 
 		$strategy = $factory($container, 'test', ['type' => $type]);
+		\expect($strategy->extract(new \ArrayObject()))->toBe([]);
 		\expect($strategy->extract(new \ArrayObject($source)))->toBe($destination);
 		\expect($strategy->extract(new \ArrayObject(\array_combine([3, 4, 5], $source))))->toBe($destination);
 	});
-	\it('creates list strategy that hydrates array of hydrated items', function ()
+	\it('creates list strategy that hydrates to empty array', function ()
+	{
+		$source = [1, 2];
+		$destination = new \ArrayObject();
+		$newDestination = [\mock(), \mock()];
+
+		$type = Example\TestClass::class;
+		$container = \mock(ContainerInterface::class);
+		$metadataProvider = \mock(DT\ClassMetadataProviderInterface::class);
+		$strategyPluginManager = \mock(DT\Strategy\PluginManager::class);
+		$valueStrategyMetadata = ['test_strategy_name', ['test_option_name' => 'test_option_value']];
+		$valueStrategy = \mock(DT\Strategy\StrategyInterface::class);
+		$factory = new OAGC\Strategy\Factory\NoArgObjectList();
+
+		$container->shouldReceive('get')->with(DT\ClassMetadataProviderInterface::class)->andReturn($metadataProvider)->once();
+		$container->shouldReceive('get')->with(DT\Strategy\PluginManager::class)->andReturn($strategyPluginManager)->once();
+		$metadataProvider->shouldReceive('getClassStrategy')->with($type, '')->andReturn($valueStrategyMetadata)->once();
+		$strategyPluginManager->shouldReceive('get')->with(...$valueStrategyMetadata)->andReturn($valueStrategy)->once();
+		$valueStrategy->shouldReceive('hydrate')->withArgs(
+			function ($a, &$b) use ($type, &$source, &$newDestination)
+			{
+				$sourceIndex = \array_search($a, $source, true);
+				$result = (($sourceIndex !== false) && ($b instanceof $type));
+				if ($result)
+				{
+					$b = $newDestination[$sourceIndex];
+				}
+				return $result;
+			}
+		)->times(\count($source));
+
+		$strategy = $factory($container, 'test', ['type' => $type]);
+		$strategy->hydrate($source, $destination);
+		\expect($destination->getArrayCopy())->toBe($newDestination);
+	});
+	\it('creates list strategy that hydrates to array with items', function ()
 	{
 		$source = [1, 2];
 		$destination = new \ArrayObject([\mock(), \mock(), \mock()]);
@@ -133,7 +169,44 @@ use spec\Example;
 		$strategy->hydrate($source, $destination);
 		\expect($destination->getArrayCopy())->toBe(\array_combine([3, 4], $newDestination));
 	});
-	\it('creates list strategy that merges array of merged items', function ()
+	\it('creates list strategy that merges to empty array', function ()
+	{
+		$source = [1, 2];
+		$destination = [];
+		$extractions = [6, 7];
+		$newDestination = [8, 9];
+
+		$type = Example\TestClass::class;
+		$container = \mock(ContainerInterface::class);
+		$metadataProvider = \mock(DT\ClassMetadataProviderInterface::class);
+		$strategyPluginManager = \mock(DT\Strategy\PluginManager::class);
+		$valueStrategyMetadata = ['test_strategy_name', ['test_option_name' => 'test_option_value']];
+		$valueStrategy = \mock(DT\Strategy\StrategyInterface::class);
+		$factory = new OAGC\Strategy\Factory\NoArgObjectList();
+
+		$container->shouldReceive('get')->with(DT\ClassMetadataProviderInterface::class)->andReturn($metadataProvider)->once();
+		$container->shouldReceive('get')->with(DT\Strategy\PluginManager::class)->andReturn($strategyPluginManager)->once();
+		$metadataProvider->shouldReceive('getClassStrategy')->with($type, '')->andReturn($valueStrategyMetadata)->once();
+		$strategyPluginManager->shouldReceive('get')->with(...$valueStrategyMetadata)->andReturn($valueStrategy)->once();
+		$valueStrategy->shouldReceive('extract')->with(\Mockery::type($type))->andReturnValues($extractions)->times(\count($source));
+		$valueStrategy->shouldReceive('merge')->withArgs(
+			function ($a, &$b) use ($type, &$source, &$extractions, &$newDestination)
+			{
+				$sourceIndex = \array_search($a, $source, true);
+				$result = (($sourceIndex !== false) && ($b === $extractions[$sourceIndex]));
+				if ($result)
+				{
+					$b = $newDestination[$sourceIndex];
+				}
+				return $result;
+			}
+		)->times(\count($source));
+
+		$strategy = $factory($container, 'test', ['type' => $type]);
+		$strategy->merge($source, $destination);
+		\expect($destination)->toBe($newDestination);
+	});
+	\it('creates list strategy that merges to array with items', function ()
 	{
 		$source = [1, 2];
 		$destination = [3, 4, 5];

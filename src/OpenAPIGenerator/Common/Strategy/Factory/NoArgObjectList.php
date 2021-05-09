@@ -29,7 +29,9 @@ class NoArgObjectList implements FactoryInterface
 		$typedValueAdder = static function &(\ArrayObject &$list, $untypedValue) use ($type)
 		{
 			$defaultValue = new $type();
-			$list[\max(\array_keys($list->getArrayCopy())) + 1] = &$defaultValue;
+			$array = $list->getArrayCopy();
+			$array[] = &$defaultValue;
+			$list->exchangeArray($array);
 			return $defaultValue;
 		};
 		$typedValueRemover = static function (\ArrayObject &$list, $typedValue): void

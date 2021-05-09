@@ -41,10 +41,21 @@ use Interop\Container\ContainerInterface;
 
 		$strategy = $factory($container, 'test', ['type' => OAGC\Validator\Scalar::TYPE_INT]);
 		$list = [1, 2, 3];
+		\expect($strategy->extract(new \ArrayObject()))->toBe([]);
 		\expect($strategy->extract(new \ArrayObject($list)))->toBe($list);
 		\expect($strategy->extract(new \ArrayObject([3 => 1, 4 => 2, 5 => 3])))->toBe($list);
 	});
-	\it('creates list strategy that hydrates scalar array', function ()
+	\it('creates list strategy that hydrates to empty scalar array', function ()
+	{
+		$container = \mock(ContainerInterface::class);
+		$factory = new OAGC\Strategy\Factory\ScalarList();
+
+		$strategy = $factory($container, 'test', ['type' => OAGC\Validator\Scalar::TYPE_INT]);
+		$destination = new \ArrayObject();
+		$strategy->hydrate([4, 5], $destination);
+		\expect($destination->getArrayCopy())->toBe([0 => 4, 1 => 5]);
+	});
+	\it('creates list strategy that hydrates to scalar array with items', function ()
 	{
 		$container = \mock(ContainerInterface::class);
 		$factory = new OAGC\Strategy\Factory\ScalarList();
@@ -54,7 +65,17 @@ use Interop\Container\ContainerInterface;
 		$strategy->hydrate([4, 5], $destination);
 		\expect($destination->getArrayCopy())->toBe([3 => 4, 4 => 5]);
 	});
-	\it('creates list strategy that merges scalar array', function ()
+	\it('creates list strategy that merges to empty scalar array', function ()
+	{
+		$container = \mock(ContainerInterface::class);
+		$factory = new OAGC\Strategy\Factory\ScalarList();
+
+		$strategy = $factory($container, 'test', ['type' => OAGC\Validator\Scalar::TYPE_INT]);
+		$destination = [];
+		$strategy->merge([4, 5], $destination);
+		\expect($destination)->toBe([0 => 4, 1 => 5]);
+	});
+	\it('creates list strategy that merges to scalar array with items', function ()
 	{
 		$container = \mock(ContainerInterface::class);
 		$factory = new OAGC\Strategy\Factory\ScalarList();
