@@ -18,7 +18,8 @@
         }
     },
     "require-dev": {
-        "kahlan/kahlan": "^5.0",
-        "mockery/mockery": "^1.3"
+        "kahlan/kahlan": "^5.2",
+        "mockery/mockery": "^1.3",
+        "symfony/polyfill-mbstring": "^1.27"
     }
 }
