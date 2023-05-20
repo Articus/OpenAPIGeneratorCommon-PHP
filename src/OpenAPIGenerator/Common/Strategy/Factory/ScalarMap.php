@@ -3,34 +3,33 @@ declare(strict_types=1);
 
 namespace OpenAPIGenerator\Common\Strategy\Factory;
 
+use ArrayObject;
 use Articus\DataTransfer as DT;
-use Interop\Container\ContainerInterface;
-use Laminas\ServiceManager\Factory\FactoryInterface;
+use Articus\PluginManager\PluginFactoryInterface;
+use LogicException;
 use OpenAPIGenerator\Common\Strategy;
+use Psr\Container\ContainerInterface;
 
-class ScalarMap implements FactoryInterface
+class ScalarMap implements PluginFactoryInterface
 {
-	public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+	public function __invoke(ContainerInterface $container, string $name, array $options = []): DT\Strategy\IdentifiableValueMap
 	{
 		$type = $options['type'] ?? null;
 		if ($type === null)
 		{
-			throw new \LogicException('Option "type" is required');
+			throw new LogicException('Option "type" is required');
 		}
 		$extractStdClass = $options['extract_std_class'] ?? false;
 
 		$valueStrategy = new Strategy\Scalar($type);
-		$nullIdentifier = static function ($value): ?string
-		{
-			return null;
-		};
-		$typedValueSetter = static function &(\ArrayObject &$map, $key, $untypedValue)
+		$nullIdentifier = static fn ($value): ?string => null;
+		$typedValueSetter = static function &(ArrayObject &$map, $key, $untypedValue)
 		{
 			$defaultValue = null;
 			$map[$key] = &$defaultValue;
 			return $defaultValue;
 		};
-		$typedValueRemover = static function (\ArrayObject &$map, $key): void
+		$typedValueRemover = static function (ArrayObject &$map, $key): void
 		{
 			unset($map[$key]);
 		};

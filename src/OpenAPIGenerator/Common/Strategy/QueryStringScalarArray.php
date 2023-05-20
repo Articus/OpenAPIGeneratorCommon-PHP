@@ -4,22 +4,29 @@ declare(strict_types=1);
 namespace OpenAPIGenerator\Common\Strategy;
 
 use Articus\DataTransfer\Exception as DTException;
+use InvalidArgumentException;
 use OpenAPIGenerator\Common\Validator;
+use function array_key_exists;
+use function explode;
+use function get_class;
+use function gettype;
+use function implode;
+use function is_array;
+use function is_object;
+use function is_string;
+use function sprintf;
 
 class QueryStringScalarArray extends QueryStringScalar
 {
-	/**
-	 * @var string|null
-	 */
-	protected $delimiter;
+	protected ?string $delimiter;
 
 	public function __construct(array $options)
 	{
 		parent::__construct($options);
 		$format = $options['format'] ?? null;
-		if (!\array_key_exists($format, Validator\QueryStringScalarArray::DELIMITER_MAP))
+		if (!array_key_exists($format, Validator\QueryStringScalarArray::DELIMITER_MAP))
 		{
-			throw new \InvalidArgumentException(\sprintf('Unknown format "%s".', $format));
+			throw new InvalidArgumentException(sprintf('Unknown format "%s".', $format));
 		}
 		$this->delimiter = Validator\QueryStringScalarArray::DELIMITER_MAP[$format];
 	}
@@ -32,13 +39,13 @@ class QueryStringScalarArray extends QueryStringScalar
 		$result = null;
 		if ($from !== null)
 		{
-			if (!\is_array($from))
+			if (!is_array($from))
 			{
 				throw new DTException\InvalidData(
 					DTException\InvalidData::DEFAULT_VIOLATION,
-					new \InvalidArgumentException(\sprintf(
+					new InvalidArgumentException(sprintf(
 						'Extraction can be done only from array, not %s',
-						\is_object($from) ? \get_class($from) : \gettype($from)
+						is_object($from) ? get_class($from) : gettype($from)
 					))
 				);
 			}
@@ -50,14 +57,14 @@ class QueryStringScalarArray extends QueryStringScalar
 				{
 					throw new DTException\InvalidData(
 						DTException\InvalidData::DEFAULT_VIOLATION,
-						new \InvalidArgumentException(
-							\sprintf('Item at index %s contains delimiter symbol and should be encoded.', $index)
+						new InvalidArgumentException(
+							sprintf('Item at index %s contains delimiter symbol and should be encoded.', $index)
 						)
 					);
 				}
 				$list[$index] = $extractedItem;
 			}
-			$result = ($this->delimiter === null) ? $list : \implode($this->delimiter, $list);
+			$result = ($this->delimiter === null) ? $list : implode($this->delimiter, $list);
 		}
 		return $result;
 	}
@@ -72,13 +79,13 @@ class QueryStringScalarArray extends QueryStringScalar
 			$list = null;
 			if ($this->delimiter === null)
 			{
-				if (!\is_array($from))
+				if (!is_array($from))
 				{
 					throw new DTException\InvalidData(
 						DTException\InvalidData::DEFAULT_VIOLATION,
-						new \InvalidArgumentException(\sprintf(
+						new InvalidArgumentException(sprintf(
 							'Hydration can be done only from array, not %s',
-							\is_object($from) ? \get_class($from) : \gettype($from)
+							is_object($from) ? get_class($from) : gettype($from)
 						))
 					);
 				}
@@ -86,18 +93,18 @@ class QueryStringScalarArray extends QueryStringScalar
 			}
 			else
 			{
-				if (!\is_string($from))
+				if (!is_string($from))
 				{
 					throw new DTException\InvalidData(
 						DTException\InvalidData::DEFAULT_VIOLATION,
-						new \InvalidArgumentException(\sprintf(
+						new InvalidArgumentException(sprintf(
 							'Hydration can be done only from string, not %s',
-							\is_object($from) ? \get_class($from) : \gettype($from)
+							is_object($from) ? get_class($from) : gettype($from)
 						))
 					);
 				}
 				//TODO allow to choose how to treat '' for strings - as [] (same other types) or ['']
-				$list = ($from === '') ? [] : \explode($this->delimiter, $from);
+				$list = ($from === '') ? [] : explode($this->delimiter, $from);
 			}
 			$to = [];
 			foreach ($list as $index => $item)

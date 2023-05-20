@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace OpenAPIGenerator\Common\Strategy;
 
 use Articus\DataTransfer\Strategy\StrategyInterface;
+use DateTimeInterface;
 
 class DateTime implements StrategyInterface
 {
@@ -17,10 +18,6 @@ class DateTime implements StrategyInterface
 	 */
 	protected $parser;
 
-	/**
-	 * @param callable $formatter
-	 * @param callable $parser
-	 */
 	public function __construct(callable $formatter, callable $parser)
 	{
 		$this->formatter = $formatter;
@@ -51,12 +48,12 @@ class DateTime implements StrategyInterface
 		$to = $from;
 	}
 
-	protected function formatDateTime(\DateTimeInterface $dateTimeObj): string
+	protected function formatDateTime(DateTimeInterface $dateTimeObj): string
 	{
 		return ($this->formatter)($dateTimeObj);
 	}
 
-	protected function parseDateTime(string $dateTimeStr): \DateTimeInterface
+	protected function parseDateTime(string $dateTimeStr): DateTimeInterface
 	{
 		return ($this->parser)($dateTimeStr);
 	}

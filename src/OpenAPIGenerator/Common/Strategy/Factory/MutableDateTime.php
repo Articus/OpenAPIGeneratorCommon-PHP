@@ -3,21 +3,26 @@ declare(strict_types=1);
 
 namespace OpenAPIGenerator\Common\Strategy\Factory;
 
-use Interop\Container\ContainerInterface;
-use Laminas\ServiceManager\Factory\FactoryInterface;
+use Articus\PluginManager\PluginFactoryInterface;
+use DateTime;
+use DateTimeInterface;
 use OpenAPIGenerator\Common\Strategy;
+use Psr\Container\ContainerInterface;
+use function strpos;
 
-class MutableDateTime implements FactoryInterface
+class MutableDateTime implements PluginFactoryInterface
 {
-	public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+	public function __invoke(ContainerInterface $container, string $name, array $options = []): Strategy\DateTime
 	{
-		$formatter = static function (\DateTimeInterface $dateTimeObj): string
+		$formatter = static function (DateTimeInterface $dateTimeObj): string
 		{
-			return $dateTimeObj->format(\DateTime::RFC3339);
+			//TODO support microseconds?
+			return $dateTimeObj->format(DateTimeInterface::RFC3339);
 		};
-		$parser = static function (string $dateTimeStr): \DateTimeInterface
+		$parser = static function (string $dateTimeStr): DateTimeInterface
 		{
-			return \DateTime::createFromFormat(\DateTime::RFC3339, $dateTimeStr);
+			$format = (strpos($dateTimeStr, '.') === false) ? DateTimeInterface::RFC3339 : 'Y-m-d\TH:i:s.uP';
+			return DateTime::createFromFormat($format, $dateTimeStr);
 		};
 		return new Strategy\DateTime($formatter, $parser);
 	}

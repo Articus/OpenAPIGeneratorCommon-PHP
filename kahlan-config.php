@@ -25,12 +25,12 @@ if (!function_exists('propertyByPath'))
 		{
 			if (!is_object($pointer))
 			{
-				throw new \LogicException(sprintf('Can not get property %s (%s) from non object', $propertyName, $index));
+				throw new LogicException(sprintf('Can not get property %s (%s) from non object', $propertyName, $index));
 			}
 			$classReflection = new ReflectionClass($pointer);
 			if (!$classReflection->hasProperty($propertyName))
 			{
-				throw new \LogicException(sprintf('Class %s does not have property %s (%s)', $classReflection->getName(), $propertyName, $index));
+				throw new LogicException(sprintf('Class %s does not have property %s (%s)', $classReflection->getName(), $propertyName, $index));
 			}
 			$propertyReflection = $classReflection->getProperty($propertyName);
 			$propertyReflection->setAccessible(true);

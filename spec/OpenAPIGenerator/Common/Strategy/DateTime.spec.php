@@ -1,87 +1,85 @@
 <?php
 declare(strict_types=1);
 
-namespace spec\OpenAPIGenerator\Common\Strategy;
-
 use OpenAPIGenerator\Common as OAGC;
 use spec\Example\InvokableInterface;
 
-\describe(OAGC\Strategy\DateTime::class, function ()
+describe(OAGC\Strategy\DateTime::class, function ()
 {
-	\afterEach(function ()
+	afterEach(function ()
 	{
-		\Mockery::close();
+		Mockery::close();
 	});
-	\context('->extract', function ()
+	context('->extract', function ()
 	{
-		\it('extracts from null', function ()
+		it('extracts from null', function ()
 		{
-			$formatter = \mock(InvokableInterface::class);
+			$formatter = mock(InvokableInterface::class);
 			$formatter->shouldReceive('__invoke')->never();
-			$parser = \mock(InvokableInterface::class);
+			$parser = mock(InvokableInterface::class);
 			$parser->shouldReceive('__invoke')->never();
 
 			$strategy = new OAGC\Strategy\DateTime($formatter, $parser);
-			\expect($strategy->extract(null))->toBeNull();
+			expect($strategy->extract(null))->toBeNull();
 		});
-		\it('extracts from DateTimeInterface with formatter', function ()
+		it('extracts from DateTimeInterface with formatter', function ()
 		{
-			$dateObj = new \DateTime();
+			$dateObj = new DateTime();
 			$dateStr = 'test123';
 
-			$formatter = \mock(InvokableInterface::class);
+			$formatter = mock(InvokableInterface::class);
 			$formatter->shouldReceive('__invoke')->with($dateObj)->andReturn($dateStr)->once();
-			$parser = \mock(InvokableInterface::class);
+			$parser = mock(InvokableInterface::class);
 			$parser->shouldReceive('__invoke')->never();
 
 			$strategy = new OAGC\Strategy\DateTime($formatter, $parser);
-			\expect($strategy->extract($dateObj))->toBe($dateStr);
+			expect($strategy->extract($dateObj))->toBe($dateStr);
 		});
 	});
-	\context('->hydrate', function ()
+	context('->hydrate', function ()
 	{
-		\it('hydrates from null', function ()
+		it('hydrates from null', function ()
 		{
-			$formatter = \mock(InvokableInterface::class);
+			$formatter = mock(InvokableInterface::class);
 			$formatter->shouldReceive('__invoke')->never();
-			$parser = \mock(InvokableInterface::class);
+			$parser = mock(InvokableInterface::class);
 			$parser->shouldReceive('__invoke')->never();
 
 			$strategy = new OAGC\Strategy\DateTime($formatter, $parser);
-			$result = \mock();
+			$result = mock();
 			$strategy->hydrate(null, $result);
-			\expect($result)->toBeNull();
+			expect($result)->toBeNull();
 		});
-		\it('hydrates from DateTimeInterface with parser', function ()
+		it('hydrates from DateTimeInterface with parser', function ()
 		{
-			$dateObj = new \DateTime();
+			$dateObj = new DateTime();
 			$dateStr = 'test123';
 
-			$formatter = \mock(InvokableInterface::class);
+			$formatter = mock(InvokableInterface::class);
 			$formatter->shouldReceive('__invoke')->never();
-			$parser = \mock(InvokableInterface::class);
+			$parser = mock(InvokableInterface::class);
 			$parser->shouldReceive('__invoke')->with($dateStr)->andReturn($dateObj)->once();;
 
 			$strategy = new OAGC\Strategy\DateTime($formatter, $parser);
-			$result = \mock();
+			$result = mock();
 			$strategy->hydrate($dateStr, $result);
-			\expect($result)->toBe($dateObj);
+			expect($result)->toBe($dateObj);
 		});
 	});
-	\context('->merge', function ()
+	context('->merge', function ()
 	{
-		\it('merges by replacing "to" with "from"', function ()
+		it('merges by replacing "to" with "from"', function ()
 		{
-			$formatter = \mock(InvokableInterface::class);
+			$formatter = mock(InvokableInterface::class);
 			$formatter->shouldReceive('__invoke')->never();
-			$parser = \mock(InvokableInterface::class);
+			$parser = mock(InvokableInterface::class);
 			$parser->shouldReceive('__invoke')->never();
 
 			$strategy = new OAGC\Strategy\DateTime($formatter, $parser);
-			$from = \mock();
-			$to = \mock();
+			$from = mock();
+			$to = mock();
 			$strategy->merge($from, $to);
-			\expect($to)->toBe($from);
+			expect($to)->toBe($from);
 		});
 	});
 });

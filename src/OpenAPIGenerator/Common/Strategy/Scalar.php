@@ -4,18 +4,14 @@ declare(strict_types=1);
 namespace OpenAPIGenerator\Common\Strategy;
 
 use Articus\DataTransfer\Strategy\StrategyInterface;
+use InvalidArgumentException;
 use OpenAPIGenerator\Common\Validator;
+use function sprintf;
 
 class Scalar implements StrategyInterface
 {
-	/**
-	 * @var string
-	 */
-	protected $type;
+	protected string $type;
 
-	/**
-	 * @param string $type
-	 */
 	public function __construct(string $type)
 	{
 		switch ($type)
@@ -27,7 +23,7 @@ class Scalar implements StrategyInterface
 				$this->type = $type;
 				break;
 			default:
-				throw new \InvalidArgumentException(\sprintf('Unknown type "%s".', $type));
+				throw new InvalidArgumentException(sprintf('Unknown type "%s".', $type));
 		}
 	}
 

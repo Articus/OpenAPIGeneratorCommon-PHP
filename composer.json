@@ -1,11 +1,11 @@
 {
     "name": "articus/openapi-generator-common",
-    "description": "Common classes for php-mezzio-ph generator of OpenAPI Generator",
+    "description": "Common classes for php-mezzio-ph and php-dt generators of OpenAPI Generator",
     "license": "MIT",
     "type": "library",
     "require": {
-        "php": "^7.1|^8.0",
-        "articus/data-transfer": "^0.5"
+        "php": "^7.4|^8.0",
+        "articus/data-transfer": "^0.6"
     },
     "autoload": {
         "psr-4": {
