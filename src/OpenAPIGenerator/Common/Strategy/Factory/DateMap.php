@@ -5,16 +5,16 @@ namespace OpenAPIGenerator\Common\Strategy\Factory;
 
 use ArrayObject;
 use Articus\DataTransfer as DT;
-use Articus\PluginManager as PM;
+use Articus\PluginManager\PluginFactoryInterface;
+use Articus\PluginManager\PluginManagerInterface;
 use Psr\Container\ContainerInterface;
 
-class ScalarMap implements PM\PluginFactoryInterface
+class DateMap implements PluginFactoryInterface
 {
 	public function __invoke(ContainerInterface $container, string $name, array $options = []): DT\Strategy\IdentifiableValueMap
 	{
-		$valueStrategy = $this->getValueStrategy($container, $options);
 		$extractStdClass = $options['extract_std_class'] ?? false;
-
+		$valueStrategy = $this->getValueStrategy($container);
 		$nullIdentifier = static fn ($value): ?string => null;
 		$typedValueSetter = static function &(ArrayObject &$map, $key, $untypedValue)
 		{
@@ -39,12 +39,12 @@ class ScalarMap implements PM\PluginFactoryInterface
 		);
 	}
 
-	protected function getValueStrategy(ContainerInterface $container, array $options): DT\Strategy\StrategyInterface
+	protected function getValueStrategy(ContainerInterface $container): DT\Strategy\StrategyInterface
 	{
-		return $this->getStrategyManager($container)(PluginManager::P_SCALAR, $options);
+		return $this->getStrategyManager($container)(PluginManager::P_DATE, []);
 	}
 
-	protected function getStrategyManager(ContainerInterface $container): PM\PluginManagerInterface
+	protected function getStrategyManager(ContainerInterface $container): PluginManagerInterface
 	{
 		return $container->get(DT\Options::DEFAULT_STRATEGY_PLUGIN_MANAGER);
 	}

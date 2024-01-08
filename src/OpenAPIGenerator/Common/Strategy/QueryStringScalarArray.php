@@ -15,6 +15,7 @@ use function is_array;
 use function is_object;
 use function is_string;
 use function sprintf;
+use function strpos;
 
 class QueryStringScalarArray extends QueryStringScalar
 {
@@ -53,7 +54,7 @@ class QueryStringScalarArray extends QueryStringScalar
 			foreach ($from as $index => $item)
 			{
 				$extractedItem = parent::extract($item);
-				if (($this->delimiter !== null) && (\strpos($extractedItem, $this->delimiter) !== false))
+				if (($this->delimiter !== null) && (strpos($extractedItem, $this->delimiter) !== false))
 				{
 					throw new DTException\InvalidData(
 						DTException\InvalidData::DEFAULT_VIOLATION,

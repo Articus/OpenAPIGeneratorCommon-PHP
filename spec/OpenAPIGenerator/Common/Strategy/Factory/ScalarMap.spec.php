@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Articus\DataTransfer as DT;
+use Articus\PluginManager as PM;
 use OpenAPIGenerator\Common as OAGC;
 use Psr\Container\ContainerInterface;
 
@@ -11,53 +12,68 @@ describe(OAGC\Strategy\Factory\ScalarMap::class, function ()
 	{
 		Mockery::close();
 	});
-	it('throws if there is no type option', function ()
+	it('creates map strategy with scalar item strategy using specified options', function ()
 	{
-		$exception = new LogicException('Option "type" is required');
+		$options = ['type' => OAGC\Validator\Scalar::TYPE_INT];
+		$scalarStrategy = mock(DT\Strategy\StrategyInterface::class);
+		$strategyManager = mock(PM\PluginManagerInterface::class);
+		$strategyManager->shouldReceive('__invoke')->with(OAGC\Strategy\Factory\PluginManager::P_SCALAR, $options)->andReturn($scalarStrategy)->once();
 		$container = mock(ContainerInterface::class);
-		$factory = new OAGC\Strategy\Factory\ScalarMap();
-		expect(static fn () => $factory($container, 'test'))->toThrow($exception);
-	});
-	it('creates map strategy with scalar item strategy using specified type', function ()
-	{
-		$container = mock(ContainerInterface::class);
-		$type = OAGC\Validator\Scalar::TYPE_INT;
+		$container->shouldReceive('get')->with(DT\Options::DEFAULT_STRATEGY_PLUGIN_MANAGER)->andReturn($strategyManager)->once();
+
 		$factory = new OAGC\Strategy\Factory\ScalarMap();
 
-		$strategy = $factory($container, 'test', ['type' => $type]);
+		$strategy = $factory($container, 'test', $options);
 		expect($strategy)->toBeAnInstanceOf(DT\Strategy\IdentifiableValueMap::class);
-		expect(propertyByPath($strategy, ['valueStrategy']))->toBeAnInstanceOf(OAGC\Strategy\Scalar::class);
-		expect(propertyByPath($strategy, ['valueStrategy', 'type']))->toBe($type);
+		expect(propertyByPath($strategy, ['valueStrategy']))->toBe($scalarStrategy);
 	});
-	it('creates map strategy with scalar item strategy using specified type and passing extract_std_class flag', function ()
+	it('creates map strategy with scalar item strategy using specified options and passing extract_std_class flag', function ()
 	{
-		$container = mock(ContainerInterface::class);
-		$type = OAGC\Validator\Scalar::TYPE_INT;
 		$extractStdClass = true;
+		$options = ['type' => OAGC\Validator\Scalar::TYPE_INT, 'extract_std_class' => $extractStdClass];
+		$scalarStrategy = mock(DT\Strategy\StrategyInterface::class);
+		$strategyManager = mock(PM\PluginManagerInterface::class);
+		$strategyManager->shouldReceive('__invoke')->with(OAGC\Strategy\Factory\PluginManager::P_SCALAR, $options)->andReturn($scalarStrategy)->once();
+		$container = mock(ContainerInterface::class);
+		$container->shouldReceive('get')->with(DT\Options::DEFAULT_STRATEGY_PLUGIN_MANAGER)->andReturn($strategyManager)->once();
+
 		$factory = new OAGC\Strategy\Factory\ScalarMap();
 
-		$strategy = $factory($container, 'test', ['type' => $type, 'extract_std_class' => $extractStdClass]);
+		$strategy = $factory($container, 'test', $options);
 		expect($strategy)->toBeAnInstanceOf(DT\Strategy\IdentifiableValueMap::class);
-		expect(propertyByPath($strategy, ['valueStrategy']))->toBeAnInstanceOf(OAGC\Strategy\Scalar::class);
+		expect(propertyByPath($strategy, ['valueStrategy']))->toBe($scalarStrategy);
 		expect(propertyByPath($strategy, ['extractStdClass']))->toBe($extractStdClass);
-		expect(propertyByPath($strategy, ['valueStrategy', 'type']))->toBe($type);
 	});
 	it('creates map strategy that extracts scalar array', function ()
 	{
 		$container = mock(ContainerInterface::class);
+		$container
+			->shouldReceive('get')
+			->with(DT\Options::DEFAULT_STRATEGY_PLUGIN_MANAGER)
+			->andReturn((new OAGC\Strategy\Factory\PluginManager)($container, 'test'))
+			->once()
+		;
+
 		$factory = new OAGC\Strategy\Factory\ScalarMap();
 
 		$strategy = $factory($container, 'test', ['type' => OAGC\Validator\Scalar::TYPE_INT]);
 		$map = ['a' => 1, 'b' => 2, 'c' => 3];
-		expect($strategy->extract(new \ArrayObject($map)))->toBe($map);
+		expect($strategy->extract(new ArrayObject($map)))->toBe($map);
 	});
 	it('creates list strategy that hydrates scalar array', function ()
 	{
 		$container = mock(ContainerInterface::class);
+		$container
+			->shouldReceive('get')
+			->with(DT\Options::DEFAULT_STRATEGY_PLUGIN_MANAGER)
+			->andReturn((new OAGC\Strategy\Factory\PluginManager)($container, 'test'))
+			->once()
+		;
+
 		$factory = new OAGC\Strategy\Factory\ScalarMap();
 
 		$strategy = $factory($container, 'test', ['type' => OAGC\Validator\Scalar::TYPE_INT]);
-		$destination = new \ArrayObject(['a' => 1, 'b' => 2, 'c' => 3]);
+		$destination = new ArrayObject(['a' => 1, 'b' => 2, 'c' => 3]);
 		$source = ['b' => 4, 'd' => 5];
 		$strategy->hydrate($source, $destination);
 		expect($destination->getArrayCopy())->toBe($source);
@@ -65,6 +81,13 @@ describe(OAGC\Strategy\Factory\ScalarMap::class, function ()
 	it('creates list strategy that merges scalar array', function ()
 	{
 		$container = mock(ContainerInterface::class);
+		$container
+			->shouldReceive('get')
+			->with(DT\Options::DEFAULT_STRATEGY_PLUGIN_MANAGER)
+			->andReturn((new OAGC\Strategy\Factory\PluginManager)($container, 'test'))
+			->once()
+		;
+
 		$factory = new OAGC\Strategy\Factory\ScalarMap();
 
 		$strategy = $factory($container, 'test', ['type' => OAGC\Validator\Scalar::TYPE_INT]);

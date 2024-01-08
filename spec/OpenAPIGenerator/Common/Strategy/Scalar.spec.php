@@ -11,10 +11,15 @@ describe(OAGC\Strategy\Scalar::class, function ()
 	});
 	context('->__construct', function ()
 	{
+		it('throws on no type', function ()
+		{
+			$exception = new InvalidArgumentException('Option "type" is required.');
+			expect(static fn () => new OAGC\Strategy\Scalar([]))->toThrow($exception);
+		});
 		it('throws on unknown type', function ()
 		{
 			$exception = new InvalidArgumentException('Unknown type "test".');
-			expect(static fn () => new OAGC\Strategy\Scalar('test'))->toThrow($exception);
+			expect(static fn () => new OAGC\Strategy\Scalar(['type' => 'test']))->toThrow($exception);
 		});
 	});
 	context('->extract', function ()
@@ -23,13 +28,13 @@ describe(OAGC\Strategy\Scalar::class, function ()
 		{
 			$value = mock();
 
-			$intStrategy = new OAGC\Strategy\Scalar(OAGC\Validator\Scalar::TYPE_INT);
+			$intStrategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_INT]);
 			expect($intStrategy->extract($value))->toBe($value);
-			$floatStrategy = new OAGC\Strategy\Scalar(OAGC\Validator\Scalar::TYPE_FLOAT);
+			$floatStrategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_FLOAT]);
 			expect($floatStrategy->extract($value))->toBe($value);
-			$boolStrategy = new OAGC\Strategy\Scalar(OAGC\Validator\Scalar::TYPE_BOOL);
+			$boolStrategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_BOOL]);
 			expect($boolStrategy->extract($value))->toBe($value);
-			$stringStrategy = new OAGC\Strategy\Scalar(OAGC\Validator\Scalar::TYPE_STRING);
+			$stringStrategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_STRING]);
 			expect($stringStrategy->extract($value))->toBe($value);
 		});
 	});
@@ -39,14 +44,14 @@ describe(OAGC\Strategy\Scalar::class, function ()
 		{
 			it('hydrates from null', function ()
 			{
-				$strategy = new OAGC\Strategy\Scalar(OAGC\Validator\Scalar::TYPE_INT);
+				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_INT]);
 				$result = mock();
 				$strategy->hydrate(null, $result);
 				expect($result)->toBeNull();
 			});
 			it('hydrates from not null by casting to type', function ()
 			{
-				$strategy = new OAGC\Strategy\Scalar(OAGC\Validator\Scalar::TYPE_INT);
+				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_INT]);
 				$result = mock();
 				$strategy->hydrate(0, $result);
 				expect($result)->toBe(0);
@@ -74,14 +79,14 @@ describe(OAGC\Strategy\Scalar::class, function ()
 		{
 			it('hydrates from null', function ()
 			{
-				$strategy = new OAGC\Strategy\Scalar(OAGC\Validator\Scalar::TYPE_FLOAT);
+				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_FLOAT]);
 				$result = mock();
 				$strategy->hydrate(null, $result);
 				expect($result)->toBeNull();
 			});
 			it('hydrates from not null by casting to type', function ()
 			{
-				$strategy = new OAGC\Strategy\Scalar(OAGC\Validator\Scalar::TYPE_FLOAT);
+				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_FLOAT]);
 				$result = mock();
 				$strategy->hydrate(0, $result);
 				expect($result)->toBe(0.0);
@@ -109,14 +114,14 @@ describe(OAGC\Strategy\Scalar::class, function ()
 		{
 			it('hydrates from null', function ()
 			{
-				$strategy = new OAGC\Strategy\Scalar(OAGC\Validator\Scalar::TYPE_BOOL);
+				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_BOOL]);
 				$result = mock();
 				$strategy->hydrate(null, $result);
 				expect($result)->toBeNull();
 			});
 			it('hydrates from not null by casting to type', function ()
 			{
-				$strategy = new OAGC\Strategy\Scalar(OAGC\Validator\Scalar::TYPE_BOOL);
+				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_BOOL]);
 				$result = mock();
 				$strategy->hydrate(0, $result);
 				expect($result)->toBe(false);
@@ -144,14 +149,14 @@ describe(OAGC\Strategy\Scalar::class, function ()
 		{
 			it('hydrates from null', function ()
 			{
-				$strategy = new OAGC\Strategy\Scalar(OAGC\Validator\Scalar::TYPE_STRING);
+				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_STRING]);
 				$result = mock();
 				$strategy->hydrate(null, $result);
 				expect($result)->toBeNull();
 			});
 			it('hydrates from not null by casting to type', function ()
 			{
-				$strategy = new OAGC\Strategy\Scalar(OAGC\Validator\Scalar::TYPE_STRING);
+				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_STRING]);
 				$result = mock();
 				$strategy->hydrate(0, $result);
 				expect($result)->toBe('0');
@@ -182,7 +187,7 @@ describe(OAGC\Strategy\Scalar::class, function ()
 		{
 			$source = mock();
 			$destination = mock();
-			$strategy = new OAGC\Strategy\Scalar(OAGC\Validator\Scalar::TYPE_INT);
+			$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_INT]);
 			$strategy->merge($source, $destination);
 			expect($destination)->toBe($source);
 		});

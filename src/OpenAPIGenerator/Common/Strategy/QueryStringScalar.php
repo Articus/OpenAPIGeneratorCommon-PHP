@@ -3,31 +3,10 @@ declare(strict_types=1);
 
 namespace OpenAPIGenerator\Common\Strategy;
 
-use Articus\DataTransfer\Strategy\StrategyInterface;
-use InvalidArgumentException;
 use OpenAPIGenerator\Common\Validator;
-use function sprintf;
 
-class QueryStringScalar implements StrategyInterface
+class QueryStringScalar extends Scalar
 {
-	protected string $type;
-
-	public function __construct(array $options)
-	{
-		$type = $options['type'] ?? null;
-		switch ($type)
-		{
-			case Validator\QueryStringScalar::TYPE_INT:
-			case Validator\QueryStringScalar::TYPE_FLOAT:
-			case Validator\QueryStringScalar::TYPE_BOOL:
-			case Validator\QueryStringScalar::TYPE_STRING:
-				$this->type = $type;
-				break;
-			default:
-				throw new InvalidArgumentException(sprintf('Unknown type "%s".', $type));
-		}
-	}
-
 	/**
 	 * @inheritDoc
 	 */
@@ -38,11 +17,11 @@ class QueryStringScalar implements StrategyInterface
 		{
 			switch ($this->type)
 			{
-				case Validator\QueryStringScalar::TYPE_BOOL:
+				case Validator\Scalar::TYPE_BOOL:
 					$result = $from ? 'true' : 'false';
 					break;
 				default:
-					$result = (string) $from;
+					$result = (string)$from;
 					break;
 			}
 		}
@@ -58,17 +37,17 @@ class QueryStringScalar implements StrategyInterface
 		{
 			switch ($this->type)
 			{
-				case Validator\QueryStringScalar::TYPE_INT:
-					$to = (int) $from;
+				case Validator\Scalar::TYPE_INT:
+					$to = (int)$from;
 					break;
-				case Validator\QueryStringScalar::TYPE_FLOAT:
-					$to = (float) $from;
+				case Validator\Scalar::TYPE_FLOAT:
+					$to = (float)$from;
 					break;
-				case Validator\QueryStringScalar::TYPE_BOOL:
+				case Validator\Scalar::TYPE_BOOL:
 					$to = ($from === 'true') ? true : false;
 					break;
-				case Validator\QueryStringScalar::TYPE_STRING:
-					$to = (string) $from;
+				case Validator\Scalar::TYPE_STRING:
+					$to = (string)$from;
 					break;
 			}
 		}
@@ -76,13 +55,5 @@ class QueryStringScalar implements StrategyInterface
 		{
 			$to = null;
 		}
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function merge($from, &$to): void
-	{
-		$to = $from;
 	}
 }

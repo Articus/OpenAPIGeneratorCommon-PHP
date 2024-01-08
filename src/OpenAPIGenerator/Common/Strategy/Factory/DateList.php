@@ -9,11 +9,11 @@ use Articus\PluginManager as PM;
 use Psr\Container\ContainerInterface;
 use function array_search;
 
-class ScalarList implements PM\PluginFactoryInterface
+class DateList implements PM\PluginFactoryInterface
 {
 	public function __invoke(ContainerInterface $container, string $name, array $options = []): DT\Strategy\IdentifiableValueList
 	{
-		$valueStrategy = $this->getValueStrategy($container, $options);
+		$valueStrategy = $this->getValueStrategy($container);
 		$nullIdentifier = static fn ($value): ?string => null;
 		$typedValueAdder = static function &(ArrayObject &$list, $untypedValue)
 		{
@@ -25,7 +25,7 @@ class ScalarList implements PM\PluginFactoryInterface
 		};
 		$typedValueRemover = static function (ArrayObject &$list, $typedValue): void
 		{
-			$index = array_search($typedValue, $list->getArrayCopy(), true);
+			$index = array_search($typedValue, $list->getArrayCopy(), false);
 			if ($index !== false)
 			{
 				unset($list[$index]);
@@ -43,9 +43,9 @@ class ScalarList implements PM\PluginFactoryInterface
 		);
 	}
 
-	protected function getValueStrategy(ContainerInterface $container, array $options): DT\Strategy\StrategyInterface
+	protected function getValueStrategy(ContainerInterface $container): DT\Strategy\StrategyInterface
 	{
-		return $this->getStrategyManager($container)(PluginManager::P_SCALAR, $options);
+		return $this->getStrategyManager($container)(PluginManager::P_DATE, []);
 	}
 
 	protected function getStrategyManager(ContainerInterface $container): PM\PluginManagerInterface

@@ -12,8 +12,13 @@ class Scalar implements StrategyInterface
 {
 	protected string $type;
 
-	public function __construct(string $type)
+	public function __construct(array $options)
 	{
+		$type = $options['type'] ?? null;
+		if ($type === null)
+		{
+			throw new InvalidArgumentException('Option "type" is required.');
+		}
 		switch ($type)
 		{
 			case Validator\Scalar::TYPE_INT:
@@ -27,11 +32,17 @@ class Scalar implements StrategyInterface
 		}
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function extract($from)
 	{
 		return $from;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function hydrate($from, &$to): void
 	{
 		if ($from !== null)
@@ -58,6 +69,9 @@ class Scalar implements StrategyInterface
 		}
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function merge($from, &$to): void
 	{
 		$to = $from;

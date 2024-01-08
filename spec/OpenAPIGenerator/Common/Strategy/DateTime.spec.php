@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Articus\DataTransfer\Exception as DTException;
 use OpenAPIGenerator\Common as OAGC;
 use spec\Example\InvokableInterface;
 
@@ -50,7 +51,7 @@ describe(OAGC\Strategy\DateTime::class, function ()
 			$strategy->hydrate(null, $result);
 			expect($result)->toBeNull();
 		});
-		it('hydrates from DateTimeInterface with parser', function ()
+		it('hydrates to DateTimeInterface with parser', function ()
 		{
 			$dateObj = new DateTime();
 			$dateStr = 'test123';
@@ -64,6 +65,29 @@ describe(OAGC\Strategy\DateTime::class, function ()
 			$result = mock();
 			$strategy->hydrate($dateStr, $result);
 			expect($result)->toBe($dateObj);
+		});
+		it('throws if parser returns null', function ()
+		{
+			$dateStr = 'test123';
+
+			$formatter = mock(InvokableInterface::class);
+			$formatter->shouldReceive('__invoke')->never();
+			$parser = mock(InvokableInterface::class);
+			$parser->shouldReceive('__invoke')->with($dateStr)->andReturn(null)->once();;
+
+			$strategy = new OAGC\Strategy\DateTime($formatter, $parser);
+			$result = mock();
+			try
+			{
+				$strategy->hydrate($dateStr, $result);
+				throw new LogicException('No expected exception');
+			}
+			catch (DTException\InvalidData $e)
+			{
+				expect($e->getViolations())->toBe(DTException\InvalidData::DEFAULT_VIOLATION);
+				expect($e->getPrevious())->toBeAnInstanceOf(InvalidArgumentException::class);
+				expect($e->getPrevious()->getMessage())->toBe('Invalid date/time string format.');
+			}
 		});
 	});
 	context('->merge', function ()

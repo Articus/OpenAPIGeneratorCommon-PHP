@@ -17,9 +17,9 @@ class ImmutableDate implements PluginFactoryInterface
 		{
 			return $dateTimeObj->format('Y-m-d');
 		};
-		$parser = static function (string $dateTimeStr): DateTimeInterface
+		$parser = static function (string $dateTimeStr): ?DateTimeInterface
 		{
-			return DateTimeImmutable::createFromFormat(DateTimeInterface::RFC3339, $dateTimeStr . 'T00:00:00+00:00');
+			return DateTimeImmutable::createFromFormat(DateTimeInterface::RFC3339, $dateTimeStr . 'T00:00:00+00:00') ?: null;
 		};
 		return new Strategy\DateTime($formatter, $parser);
 	}

@@ -22,11 +22,13 @@ class Scalar implements ValidatorInterface
 
 	protected string $type;
 
-	/**
-	 */
 	public function __construct(array $options)
 	{
 		$type = $options['type'] ?? null;
+		if ($type === null)
+		{
+			throw new InvalidArgumentException('Option "type" is required.');
+		}
 		switch ($type)
 		{
 			case self::TYPE_INT:

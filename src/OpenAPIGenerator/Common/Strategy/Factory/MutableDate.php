@@ -17,9 +17,9 @@ class MutableDate implements PluginFactoryInterface
 		{
 			return $dateTimeObj->format('Y-m-d');
 		};
-		$parser = static function (string $dateTimeStr): DateTimeInterface
+		$parser = static function (string $dateTimeStr): ?DateTimeInterface
 		{
-			return DateTime::createFromFormat(DateTime::RFC3339, $dateTimeStr . 'T00:00:00+00:00');
+			return DateTime::createFromFormat(DateTime::RFC3339, $dateTimeStr . 'T00:00:00+00:00') ?: null;
 		};
 		return new Strategy\DateTime($formatter, $parser);
 	}

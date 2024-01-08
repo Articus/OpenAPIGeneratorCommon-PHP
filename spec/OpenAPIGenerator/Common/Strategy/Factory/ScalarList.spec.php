@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Articus\DataTransfer as DT;
+use Articus\PluginManager as PM;
 use OpenAPIGenerator\Common as OAGC;
 use Psr\Container\ContainerInterface;
 
@@ -11,27 +12,31 @@ describe(OAGC\Strategy\Factory\ScalarList::class, function ()
 	{
 		Mockery::close();
 	});
-	it('throws if there is no type option', function ()
+	it('creates list strategy with scalar item strategy using specified options', function ()
 	{
-		$exception = new LogicException('Option "type" is required');
+		$options = ['type' => OAGC\Validator\Scalar::TYPE_INT];
+		$scalarStrategy = mock(DT\Strategy\StrategyInterface::class);
+		$strategyManager = mock(PM\PluginManagerInterface::class);
+		$strategyManager->shouldReceive('__invoke')->with(OAGC\Strategy\Factory\PluginManager::P_SCALAR, $options)->andReturn($scalarStrategy)->once();
 		$container = mock(ContainerInterface::class);
-		$factory = new OAGC\Strategy\Factory\ScalarList();
-		expect(static fn () => $factory($container, 'test'))->toThrow($exception);
-	});
-	it('creates list strategy with scalar item strategy using specified type', function ()
-	{
-		$container = mock(ContainerInterface::class);
-		$type = OAGC\Validator\Scalar::TYPE_INT;
+		$container->shouldReceive('get')->with(DT\Options::DEFAULT_STRATEGY_PLUGIN_MANAGER)->andReturn($strategyManager)->once();
+
 		$factory = new OAGC\Strategy\Factory\ScalarList();
 
-		$strategy = $factory($container, 'test', ['type' => $type]);
+		$strategy = $factory($container, 'test', $options);
 		expect($strategy)->toBeAnInstanceOf(DT\Strategy\IdentifiableValueList::class);
-		expect(propertyByPath($strategy, ['valueStrategy']))->toBeAnInstanceOf(OAGC\Strategy\Scalar::class);
-		expect(propertyByPath($strategy, ['valueStrategy', 'type']))->toBe($type);
+		expect(propertyByPath($strategy, ['valueStrategy']))->toBe($scalarStrategy);
 	});
 	it('creates list strategy that extracts scalar array', function ()
 	{
 		$container = mock(ContainerInterface::class);
+		$container
+			->shouldReceive('get')
+			->with(DT\Options::DEFAULT_STRATEGY_PLUGIN_MANAGER)
+			->andReturn((new OAGC\Strategy\Factory\PluginManager)($container, 'test'))
+			->once()
+		;
+
 		$factory = new OAGC\Strategy\Factory\ScalarList();
 
 		$strategy = $factory($container, 'test', ['type' => OAGC\Validator\Scalar::TYPE_INT]);
@@ -43,6 +48,13 @@ describe(OAGC\Strategy\Factory\ScalarList::class, function ()
 	it('creates list strategy that hydrates to empty scalar array', function ()
 	{
 		$container = mock(ContainerInterface::class);
+		$container
+			->shouldReceive('get')
+			->with(DT\Options::DEFAULT_STRATEGY_PLUGIN_MANAGER)
+			->andReturn((new OAGC\Strategy\Factory\PluginManager)($container, 'test'))
+			->once()
+		;
+
 		$factory = new OAGC\Strategy\Factory\ScalarList();
 
 		$strategy = $factory($container, 'test', ['type' => OAGC\Validator\Scalar::TYPE_INT]);
@@ -53,6 +65,13 @@ describe(OAGC\Strategy\Factory\ScalarList::class, function ()
 	it('creates list strategy that hydrates to scalar array with items', function ()
 	{
 		$container = mock(ContainerInterface::class);
+		$container
+			->shouldReceive('get')
+			->with(DT\Options::DEFAULT_STRATEGY_PLUGIN_MANAGER)
+			->andReturn((new OAGC\Strategy\Factory\PluginManager)($container, 'test'))
+			->once()
+		;
+
 		$factory = new OAGC\Strategy\Factory\ScalarList();
 
 		$strategy = $factory($container, 'test', ['type' => OAGC\Validator\Scalar::TYPE_INT]);
@@ -63,6 +82,13 @@ describe(OAGC\Strategy\Factory\ScalarList::class, function ()
 	it('creates list strategy that merges to empty scalar array', function ()
 	{
 		$container = mock(ContainerInterface::class);
+		$container
+			->shouldReceive('get')
+			->with(DT\Options::DEFAULT_STRATEGY_PLUGIN_MANAGER)
+			->andReturn((new OAGC\Strategy\Factory\PluginManager)($container, 'test'))
+			->once()
+		;
+
 		$factory = new OAGC\Strategy\Factory\ScalarList();
 
 		$strategy = $factory($container, 'test', ['type' => OAGC\Validator\Scalar::TYPE_INT]);
@@ -73,6 +99,13 @@ describe(OAGC\Strategy\Factory\ScalarList::class, function ()
 	it('creates list strategy that merges to scalar array with items', function ()
 	{
 		$container = mock(ContainerInterface::class);
+		$container
+			->shouldReceive('get')
+			->with(DT\Options::DEFAULT_STRATEGY_PLUGIN_MANAGER)
+			->andReturn((new OAGC\Strategy\Factory\PluginManager)($container, 'test'))
+			->once()
+		;
+
 		$factory = new OAGC\Strategy\Factory\ScalarList();
 
 		$strategy = $factory($container, 'test', ['type' => OAGC\Validator\Scalar::TYPE_INT]);

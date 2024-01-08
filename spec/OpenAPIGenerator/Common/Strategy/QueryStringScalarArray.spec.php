@@ -14,7 +14,7 @@ describe(OAGC\Strategy\QueryStringScalarArray::class, function ()
 	{
 		it('throws on no type', function ()
 		{
-			$exception = new InvalidArgumentException('Unknown type "".');
+			$exception = new InvalidArgumentException('Option "type" is required.');
 			expect(static fn () => new OAGC\Strategy\QueryStringScalarArray([]))->toThrow($exception);
 		});
 		it('throws on invalid type', function ()

@@ -19,10 +19,10 @@ class MutableDateTime implements PluginFactoryInterface
 			//TODO support microseconds?
 			return $dateTimeObj->format(DateTimeInterface::RFC3339);
 		};
-		$parser = static function (string $dateTimeStr): DateTimeInterface
+		$parser = static function (string $dateTimeStr): ?DateTimeInterface
 		{
 			$format = (strpos($dateTimeStr, '.') === false) ? DateTimeInterface::RFC3339 : 'Y-m-d\TH:i:s.uP';
-			return DateTime::createFromFormat($format, $dateTimeStr);
+			return DateTime::createFromFormat($format, $dateTimeStr) ?: null;
 		};
 		return new Strategy\DateTime($formatter, $parser);
 	}
