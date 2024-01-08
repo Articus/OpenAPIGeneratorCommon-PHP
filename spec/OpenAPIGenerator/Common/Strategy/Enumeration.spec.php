@@ -43,7 +43,7 @@ describe(OAGC\Strategy\Enumeration::class, function ()
 			skipIf(PHP_VERSION_ID < 80100);
 
 			$strategy = new OAGC\Strategy\Enumeration(['type' => TestEnum::class]);
-			expect($strategy->extract(TestEnum::ABC))->toBe(TestEnum::ABC->value);
+			expect($strategy->extract(TestEnum::ABC))->toBe('abc'/*TestEnum::ABC->value*/);
 		});
 		it('throws on value of invalid type', function ()
 		{
@@ -83,7 +83,7 @@ describe(OAGC\Strategy\Enumeration::class, function ()
 		{
 			skipIf(PHP_VERSION_ID < 80100);
 
-			$valueStr = TestEnum::ABC->value;
+			$valueStr = 'abc'/*TestEnum::ABC->value*/;
 			$valueEnum = TestEnum::ABC;
 
 			$strategy = new OAGC\Strategy\Enumeration(['type' => TestEnum::class]);

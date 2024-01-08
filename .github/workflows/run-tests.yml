@@ -13,11 +13,15 @@ jobs:
           - php: '8.0'
           - php: '8.1'
           - php: '8.2'
+          - php: '8.3'
             upload_coverage: true
-    container: ghcr.io/articus/phpdbg-coveralls:${{ matrix.php }}_2.5.3_2022-12-10
+    container: ghcr.io/articus/phpdbg-coveralls:${{ matrix.php }}_2.7.0_2024-01-08
     steps:
+      - name: Workaround for https://git-scm.com/docs/git-config/2.39.2#Documentation/git-config.txt-safedirectory
+        run: chown root:root ./
+
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install dependencies via Composer
         run: php ./composer.phar install --no-interaction --no-progress --prefer-dist --classmap-authoritative

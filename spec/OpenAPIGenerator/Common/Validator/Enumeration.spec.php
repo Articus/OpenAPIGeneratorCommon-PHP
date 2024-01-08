@@ -62,8 +62,8 @@ describe(OAGC\Validator\Enumeration::class, function ()
 
 			$type = TestEnum::class;
 			$validator = new OAGC\Validator\Enumeration(['type' => $type]);
-			expect($validator->validate(TestEnum::ABC->value))->toBe([]);
-			expect($validator->validate(TestEnum::DEF->value))->toBe([]);
+			expect($validator->validate('abc'/*TestEnum::ABC->value*/))->toBe([]);
+			expect($validator->validate('def'/*TestEnum::DEF->value*/))->toBe([]);
 		});
 	});
 });
