@@ -31,8 +31,8 @@ class PluginManager implements PM\ServiceFactoryInterface
 			self::P_ENUM_ANON => new PM\Factory\InvokablePlugin(Validator\AnonymousEnumeration::class),
 			self::P_LENGTH => new PM\Factory\InvokablePlugin(Validator\StringLength::class),
 			self::P_MATCH => new PM\Factory\InvokablePlugin(Validator\StringMatch::class),
-			self::P_QUERY_STRING_SCALAR => new PM\Factory\InvokablePlugin(Validator\QueryStringScalar::class),
-			self::P_QUERY_STRING_SCALAR_ARRAY => new PM\Factory\InvokablePlugin(Validator\QueryStringScalarArray::class),
+			self::P_QUERY_STRING_SCALAR => new QueryStringScalar(),
+			self::P_QUERY_STRING_SCALAR_ARRAY => new QueryStringScalarArray(),
 			self::P_RANGE => new PM\Factory\InvokablePlugin(Validator\NumberRange::class),
 			self::P_SCALAR => new PM\Factory\InvokablePlugin(Validator\Scalar::class),
 		];

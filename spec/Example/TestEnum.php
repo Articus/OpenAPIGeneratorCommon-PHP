@@ -9,6 +9,7 @@ enum TestEnum: string
 {
 	case ABC = 'abc';
 	case DEF = 'def';
+	case GHI = 'ghi';
 
 	public static function values(): array
 	{

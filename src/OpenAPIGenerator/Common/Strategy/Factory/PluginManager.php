@@ -16,6 +16,8 @@ class PluginManager implements PM\ServiceFactoryInterface
 	public const P_DATE_MAP = 'DateMap';
 	public const P_DATE_TIME_MAP = 'DateTimeMap';
 	public const P_ENUM = 'Enum';
+	public const P_ENUM_LIST = 'EnumList';
+	public const P_ENUM_MAP = 'EnumMap';
 	public const P_OBJECT_LIST = 'ObjectList';
 	public const P_OBJECT_MAP = 'ObjectMap';
 	public const P_QUERY_STRING_SCALAR = 'QueryStringScalar';
@@ -68,10 +70,12 @@ class PluginManager implements PM\ServiceFactoryInterface
 			self::P_DATE_MAP => new DateMap(),
 			self::P_DATE_TIME_MAP => new DateTimeMap(),
 			self::P_ENUM => new PM\Factory\InvokablePlugin(Strategy\Enumeration::class),
+			self::P_ENUM_LIST => new EnumerationList(),
+			self::P_ENUM_MAP => new EnumerationMap(),
 			self::P_OBJECT_LIST => new NoArgObjectList(),
 			self::P_OBJECT_MAP => new NoArgObjectMap(),
-			self::P_QUERY_STRING_SCALAR => new PM\Factory\InvokablePlugin(Strategy\QueryStringScalar::class),
-			self::P_QUERY_STRING_SCALAR_ARRAY => new PM\Factory\InvokablePlugin(Strategy\QueryStringScalarArray::class),
+			self::P_QUERY_STRING_SCALAR => new QueryStringScalar(),
+			self::P_QUERY_STRING_SCALAR_ARRAY => new QueryStringScalarArray(),
 			self::P_SCALAR => new PM\Factory\InvokablePlugin(Strategy\Scalar::class),
 			self::P_SCALAR_LIST => new ScalarList(),
 			self::P_SCALAR_MAP => new ScalarMap(),
@@ -82,6 +86,8 @@ class PluginManager implements PM\ServiceFactoryInterface
 			self::P_DATE_MAP => true,
 			self::P_DATE_TIME_MAP => true,
 			self::P_ENUM => true,
+			self::P_ENUM_LIST => true,
+			self::P_ENUM_MAP => true,
 			self::P_OBJECT_LIST => true,
 			self::P_OBJECT_MAP => true,
 			self::P_QUERY_STRING_SCALAR => true,

@@ -26,6 +26,8 @@ describe(OAGC\Strategy\Factory\PluginManager::class, function ()
 			OAGC\Strategy\Factory\PluginManager::P_DATE_MAP,
 			OAGC\Strategy\Factory\PluginManager::P_DATE_TIME_MAP,
 			OAGC\Strategy\Factory\PluginManager::P_ENUM,
+			OAGC\Strategy\Factory\PluginManager::P_ENUM_LIST,
+			OAGC\Strategy\Factory\PluginManager::P_ENUM_MAP,
 			OAGC\Strategy\Factory\PluginManager::P_OBJECT_LIST,
 			OAGC\Strategy\Factory\PluginManager::P_OBJECT_MAP,
 			OAGC\Strategy\Factory\PluginManager::P_QUERY_STRING_SCALAR,
