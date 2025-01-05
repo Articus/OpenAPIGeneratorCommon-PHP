@@ -31,7 +31,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 	it('uses Articus\DataTransfer\Strategy\Whatever on no strategy', function ()
 	{
 		$options = [
-			'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_BOOL,
+			'type' => OAGC\ScalarType::BOOL,
 		];
 
 		$valueStrategy = mock(DT\Strategy\StrategyInterface::class);
@@ -56,7 +56,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_BOOL,
+					'type' => OAGC\ScalarType::BOOL,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 
@@ -86,7 +86,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_BOOL,
+					'type' => OAGC\ScalarType::BOOL,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 				$error = [OAGC\QueryStringScalarAware::ERROR_BOOL => 'Invalid query string parameter type: expecting bool.'];
@@ -129,7 +129,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_BOOL,
+					'type' => OAGC\ScalarType::BOOL,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 				$value = mock();
@@ -171,7 +171,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_BOOL,
+					'type' => OAGC\ScalarType::BOOL,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 				$error = [OAGC\QueryStringScalarAware::ERROR_BOOL => 'Invalid query string parameter type: expecting bool.'];
@@ -214,7 +214,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_BOOL,
+					'type' => OAGC\ScalarType::BOOL,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 				$error = [OAGC\QueryStringScalarAware::ERROR_BOOL => 'Invalid query string parameter type: expecting bool.'];
@@ -257,7 +257,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_BOOL,
+					'type' => OAGC\ScalarType::BOOL,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 
@@ -300,7 +300,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+					'type' => OAGC\ScalarType::INT,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 
@@ -331,7 +331,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+					'type' => OAGC\ScalarType::INT,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 				$error = [OAGC\QueryStringScalarAware::ERROR_INT => 'Invalid query string parameter type: expecting int.'];
@@ -373,7 +373,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+					'type' => OAGC\ScalarType::INT,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 				$value = mock();
@@ -416,7 +416,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+					'type' => OAGC\ScalarType::INT,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 				$error = [OAGC\QueryStringScalarAware::ERROR_INT => 'Invalid query string parameter type: expecting int.'];
@@ -458,7 +458,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+					'type' => OAGC\ScalarType::INT,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 				$error = [OAGC\QueryStringScalarAware::ERROR_INT => 'Invalid query string parameter type: expecting int.'];
@@ -500,7 +500,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+					'type' => OAGC\ScalarType::INT,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 
@@ -542,7 +542,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_FLOAT,
+					'type' => OAGC\ScalarType::FLOAT,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 
@@ -575,7 +575,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_FLOAT,
+					'type' => OAGC\ScalarType::FLOAT,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 				$error = [OAGC\QueryStringScalarAware::ERROR_FLOAT => 'Invalid query string parameter type: expecting float.'];
@@ -612,7 +612,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_FLOAT,
+					'type' => OAGC\ScalarType::FLOAT,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 				$value = mock();
@@ -660,7 +660,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_FLOAT,
+					'type' => OAGC\ScalarType::FLOAT,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 				$error = [OAGC\QueryStringScalarAware::ERROR_FLOAT => 'Invalid query string parameter type: expecting float.'];
@@ -697,7 +697,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_FLOAT,
+					'type' => OAGC\ScalarType::FLOAT,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 				$error = [OAGC\QueryStringScalarAware::ERROR_FLOAT => 'Invalid query string parameter type: expecting float.'];
@@ -734,7 +734,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_FLOAT,
+					'type' => OAGC\ScalarType::FLOAT,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 
@@ -778,7 +778,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_STRING,
+					'type' => OAGC\ScalarType::STRING,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 
@@ -808,7 +808,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_STRING,
+					'type' => OAGC\ScalarType::STRING,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 				$value = mock();
@@ -850,7 +850,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalar::class, function ()
 				$valueStrategyName = 'test_strategy';
 				$valueStrategyOptions = ['aaa' => 111];
 				$options = [
-					'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_STRING,
+					'type' => OAGC\ScalarType::STRING,
 					'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 				];
 

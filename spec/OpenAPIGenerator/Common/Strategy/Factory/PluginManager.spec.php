@@ -32,6 +32,7 @@ describe(OAGC\Strategy\Factory\PluginManager::class, function ()
 			OAGC\Strategy\Factory\PluginManager::P_OBJECT_MAP,
 			OAGC\Strategy\Factory\PluginManager::P_QUERY_STRING_SCALAR,
 			OAGC\Strategy\Factory\PluginManager::P_QUERY_STRING_SCALAR_ARRAY,
+			OAGC\Strategy\Factory\PluginManager::P_QUERY_STRING_SCALAR_LIST,
 			OAGC\Strategy\Factory\PluginManager::P_SCALAR,
 			OAGC\Strategy\Factory\PluginManager::P_SCALAR_LIST,
 			OAGC\Strategy\Factory\PluginManager::P_SCALAR_MAP,

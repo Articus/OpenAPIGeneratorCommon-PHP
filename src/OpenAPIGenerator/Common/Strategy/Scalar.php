@@ -5,7 +5,7 @@ namespace OpenAPIGenerator\Common\Strategy;
 
 use Articus\DataTransfer\Strategy\StrategyInterface;
 use InvalidArgumentException;
-use OpenAPIGenerator\Common\Validator;
+use OpenAPIGenerator\Common\ScalarType;
 use function sprintf;
 
 class Scalar implements StrategyInterface
@@ -21,10 +21,10 @@ class Scalar implements StrategyInterface
 		}
 		switch ($type)
 		{
-			case Validator\Scalar::TYPE_INT:
-			case Validator\Scalar::TYPE_FLOAT:
-			case Validator\Scalar::TYPE_BOOL:
-			case Validator\Scalar::TYPE_STRING:
+			case ScalarType::BOOL:
+			case ScalarType::INT:
+			case ScalarType::FLOAT:
+			case ScalarType::STRING:
 				$this->type = $type;
 				break;
 			default:
@@ -49,16 +49,16 @@ class Scalar implements StrategyInterface
 		{
 			switch ($this->type)
 			{
-				case Validator\Scalar::TYPE_INT:
-					$to = (int) $from;
-					break;
-				case Validator\Scalar::TYPE_FLOAT:
-					$to = (float) $from;
-					break;
-				case Validator\Scalar::TYPE_BOOL:
+				case ScalarType::BOOL:
 					$to = (bool) $from;
 					break;
-				case Validator\Scalar::TYPE_STRING:
+				case ScalarType::INT:
+					$to = (int) $from;
+					break;
+				case ScalarType::FLOAT:
+					$to = (float) $from;
+					break;
+				case ScalarType::STRING:
 					$to = (string) $from;
 					break;
 			}

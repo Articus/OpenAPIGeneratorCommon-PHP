@@ -35,7 +35,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 		$factory = new OAGC\Validator\Factory\QueryStringScalarArray();
 
 		$exception = new InvalidArgumentException('Option "format" is required.');
-		expect(static fn () => $factory($container, '', ['type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL]))->toThrow($exception);
+		expect(static fn () => $factory($container, '', ['type' => OAGC\ScalarType::BOOL]))->toThrow($exception);
 	});
 	it('throws on invalid format', function ()
 	{
@@ -43,12 +43,12 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 		$factory = new OAGC\Validator\Factory\QueryStringScalarArray();
 
 		$exception = new InvalidArgumentException('Unknown format "test".');
-		expect(static fn () => $factory($container, '', ['type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL, 'format' => 'test']))->toThrow($exception);
+		expect(static fn () => $factory($container, '', ['type' => OAGC\ScalarType::BOOL, 'format' => 'test']))->toThrow($exception);
 	});
 	it('uses [] on no validators', function ()
 	{
 		$options = [
-			'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+			'type' => OAGC\ScalarType::BOOL,
 			'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 		];
 		$chain = mock(DT\Validator\ValidatorInterface::class);
@@ -71,7 +71,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+					'type' => OAGC\ScalarType::BOOL,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 					'validators' => $links,
 				];
@@ -95,7 +95,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+					'type' => OAGC\ScalarType::BOOL,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 					'validators' => $links,
 				];
@@ -127,7 +127,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+					'type' => OAGC\ScalarType::BOOL,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 					'validators' => $links,
 				];
@@ -151,7 +151,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+					'type' => OAGC\ScalarType::BOOL,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 					'validators' => $links,
 				];
@@ -183,7 +183,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+					'type' => OAGC\ScalarType::BOOL,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 					'validators' => $links,
 				];
@@ -207,7 +207,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+					'type' => OAGC\ScalarType::BOOL,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 					'validators' => $links,
 				];
@@ -239,7 +239,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+					'type' => OAGC\ScalarType::BOOL,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 					'validators' => $links,
 				];
@@ -263,7 +263,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+					'type' => OAGC\ScalarType::BOOL,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 					'validators' => $links,
 				];
@@ -298,7 +298,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_INT,
+					'type' => OAGC\ScalarType::INT,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 					'validators' => $links,
 				];
@@ -322,7 +322,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_INT,
+					'type' => OAGC\ScalarType::INT,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 					'validators' => $links,
 				];
@@ -354,7 +354,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_INT,
+					'type' => OAGC\ScalarType::INT,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 					'validators' => $links,
 				];
@@ -378,7 +378,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_INT,
+					'type' => OAGC\ScalarType::INT,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 					'validators' => $links,
 				];
@@ -410,7 +410,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_INT,
+					'type' => OAGC\ScalarType::INT,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 					'validators' => $links,
 				];
@@ -434,7 +434,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_INT,
+					'type' => OAGC\ScalarType::INT,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 					'validators' => $links,
 				];
@@ -466,7 +466,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_INT,
+					'type' => OAGC\ScalarType::INT,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 					'validators' => $links,
 				];
@@ -490,7 +490,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_INT,
+					'type' => OAGC\ScalarType::INT,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 					'validators' => $links,
 				];
@@ -525,7 +525,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+					'type' => OAGC\ScalarType::FLOAT,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 					'validators' => $links,
 				];
@@ -549,7 +549,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+					'type' => OAGC\ScalarType::FLOAT,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 					'validators' => $links,
 				];
@@ -581,7 +581,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+					'type' => OAGC\ScalarType::FLOAT,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 					'validators' => $links,
 				];
@@ -605,7 +605,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+					'type' => OAGC\ScalarType::FLOAT,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 					'validators' => $links,
 				];
@@ -637,7 +637,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+					'type' => OAGC\ScalarType::FLOAT,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 					'validators' => $links,
 				];
@@ -661,7 +661,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+					'type' => OAGC\ScalarType::FLOAT,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 					'validators' => $links,
 				];
@@ -693,7 +693,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+					'type' => OAGC\ScalarType::FLOAT,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 					'validators' => $links,
 				];
@@ -717,7 +717,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+					'type' => OAGC\ScalarType::FLOAT,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 					'validators' => $links,
 				];
@@ -752,7 +752,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_STRING,
+					'type' => OAGC\ScalarType::STRING,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 					'validators' => $links,
 				];
@@ -784,7 +784,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_STRING,
+					'type' => OAGC\ScalarType::STRING,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 					'validators' => $links,
 				];
@@ -816,7 +816,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_STRING,
+					'type' => OAGC\ScalarType::STRING,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 					'validators' => $links,
 				];
@@ -848,7 +848,7 @@ describe(OAGC\Validator\Factory\QueryStringScalarArray::class, function ()
 			{
 				$links = ['abc' => 123];
 				$options = [
-					'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_STRING,
+					'type' => OAGC\ScalarType::STRING,
 					'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 					'validators' => $links,
 				];

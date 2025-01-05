@@ -21,7 +21,7 @@ abstract class QueryStringScalarArrayAware extends QueryStringScalarAware
 
 	/**
 	 * @param self::ARRAY_FORMAT_* $format
-	 * @param self::SCALAR_TYPE_* $type
+	 * @param ScalarType::* $type
 	 * @return array{0: callable(mixed): string, 1: callable(string): mixed}
 	 */
 	protected static function getScalarArrayCoder($format, $type): array

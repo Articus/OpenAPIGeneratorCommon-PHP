@@ -13,17 +13,12 @@ use function sprintf;
  */
 abstract class QueryStringScalarAware
 {
-	public const SCALAR_TYPE_BOOL = 'bool';
-	public const SCALAR_TYPE_INT = 'int';
-	public const SCALAR_TYPE_FLOAT = 'float';
-	public const SCALAR_TYPE_STRING = 'string';
-
 	public const ERROR_BOOL = 'notQueryStringBool';
 	public const ERROR_INT = 'notQueryStringInt';
 	public const ERROR_FLOAT = 'notQueryStringFloat';
 
 	/**
-	 * @param self::SCALAR_TYPE_* $type
+	 * @param ScalarType::* $type
 	 * @return array{0: callable(mixed): string, 1: callable(string): mixed}
 	 */
 	protected static function getScalarCoder($type): array
@@ -32,7 +27,7 @@ abstract class QueryStringScalarAware
 		$decoder = null;
 		switch ($type)
 		{
-			case self::SCALAR_TYPE_BOOL:
+			case ScalarType::BOOL:
 				$encoder = static fn (bool $value): string => $value ? 'true' : 'false';
 				$decoder = static function (string $value): bool
 				{
@@ -47,7 +42,7 @@ abstract class QueryStringScalarAware
 					}
 				};
 				break;
-			case self::SCALAR_TYPE_INT:
+			case ScalarType::INT:
 				$encoder = static fn (int $value): string => (string) $value;
 				$decoder = static function (string $value): int
 				{
@@ -60,7 +55,7 @@ abstract class QueryStringScalarAware
 					return $result;
 				};
 				break;
-			case self::SCALAR_TYPE_FLOAT:
+			case ScalarType::FLOAT:
 				$encoder = static fn (float $value): string => (string) $value;
 				$decoder = static function (string $value): float
 				{
@@ -72,7 +67,7 @@ abstract class QueryStringScalarAware
 					return (float) $value;
 				};
 				break;
-			case self::SCALAR_TYPE_STRING:
+			case ScalarType::STRING:
 				$encoder = $decoder = static fn (string $value): string => $value;
 				break;
 			case null:

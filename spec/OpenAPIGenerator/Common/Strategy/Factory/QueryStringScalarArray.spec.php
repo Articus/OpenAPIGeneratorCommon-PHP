@@ -34,7 +34,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 		$factory = new OAGC\Strategy\Factory\QueryStringScalarArray();
 
 		$exception = new InvalidArgumentException('Option "format" is required.');
-		expect(static fn () => $factory($container, '', ['type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL]))->toThrow($exception);
+		expect(static fn () => $factory($container, '', ['type' => OAGC\ScalarType::BOOL]))->toThrow($exception);
 	});
 	it('throws on invalid format', function ()
 	{
@@ -42,12 +42,12 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 		$factory = new OAGC\Strategy\Factory\QueryStringScalarArray();
 
 		$exception = new InvalidArgumentException('Unknown format "test".');
-		expect(static fn () => $factory($container, '', ['type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL, 'format' => 'test']))->toThrow($exception);
+		expect(static fn () => $factory($container, '', ['type' => OAGC\ScalarType::BOOL, 'format' => 'test']))->toThrow($exception);
 	});
 	it('uses Articus\DataTransfer\Strategy\Whatever on no strategy', function ()
 	{
 		$options = [
-			'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+			'type' => OAGC\ScalarType::BOOL,
 			'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 		];
 
@@ -75,7 +75,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -107,7 +107,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -151,7 +151,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -196,7 +196,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -240,7 +240,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -284,7 +284,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -329,7 +329,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -361,7 +361,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -405,7 +405,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -450,7 +450,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -494,7 +494,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -538,7 +538,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -583,7 +583,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -615,7 +615,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -659,7 +659,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -704,7 +704,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -748,7 +748,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -792,7 +792,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -837,7 +837,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -869,7 +869,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -913,7 +913,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -958,7 +958,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1002,7 +1002,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1046,7 +1046,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_BOOL,
+						'type' => OAGC\ScalarType::BOOL,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1094,7 +1094,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1126,7 +1126,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1169,7 +1169,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1214,7 +1214,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1257,7 +1257,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1300,7 +1300,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1344,7 +1344,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1376,7 +1376,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1419,7 +1419,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1464,7 +1464,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1507,7 +1507,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1550,7 +1550,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1594,7 +1594,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1626,7 +1626,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1669,7 +1669,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1714,7 +1714,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1757,7 +1757,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1800,7 +1800,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1844,7 +1844,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1876,7 +1876,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1919,7 +1919,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -1964,7 +1964,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2007,7 +2007,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2050,7 +2050,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT,
+						'type' => OAGC\ScalarType::INT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2097,7 +2097,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2129,7 +2129,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2167,7 +2167,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2217,7 +2217,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2255,7 +2255,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2293,7 +2293,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2337,7 +2337,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2369,7 +2369,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2407,7 +2407,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2457,7 +2457,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2495,7 +2495,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2533,7 +2533,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2577,7 +2577,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2609,7 +2609,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2647,7 +2647,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2697,7 +2697,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2735,7 +2735,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2773,7 +2773,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2817,7 +2817,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2849,7 +2849,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2887,7 +2887,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2937,7 +2937,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -2975,7 +2975,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -3013,7 +3013,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_FLOAT,
+						'type' => OAGC\ScalarType::FLOAT,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -3060,7 +3060,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_STRING,
+						'type' => OAGC\ScalarType::STRING,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -3092,7 +3092,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_STRING,
+						'type' => OAGC\ScalarType::STRING,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -3136,7 +3136,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_STRING,
+						'type' => OAGC\ScalarType::STRING,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_CSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -3180,7 +3180,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_STRING,
+						'type' => OAGC\ScalarType::STRING,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -3212,7 +3212,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_STRING,
+						'type' => OAGC\ScalarType::STRING,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -3256,7 +3256,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_STRING,
+						'type' => OAGC\ScalarType::STRING,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_SSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -3300,7 +3300,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_STRING,
+						'type' => OAGC\ScalarType::STRING,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -3332,7 +3332,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_STRING,
+						'type' => OAGC\ScalarType::STRING,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -3376,7 +3376,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_STRING,
+						'type' => OAGC\ScalarType::STRING,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_TSV,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -3420,7 +3420,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_STRING,
+						'type' => OAGC\ScalarType::STRING,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -3452,7 +3452,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarArrayAware::SCALAR_TYPE_STRING,
+						'type' => OAGC\ScalarType::STRING,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];
@@ -3496,7 +3496,7 @@ describe(OAGC\Strategy\Factory\QueryStringScalarArray::class, function ()
 					$valueStrategyName = 'test_strategy';
 					$valueStrategyOptions = ['aaa' => 111];
 					$options = [
-						'type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_STRING,
+						'type' => OAGC\ScalarType::STRING,
 						'format' => OAGC\QueryStringScalarArrayAware::ARRAY_FORMAT_PIPES,
 						'strategy' => ['name' => $valueStrategyName, 'options' => $valueStrategyOptions],
 					];

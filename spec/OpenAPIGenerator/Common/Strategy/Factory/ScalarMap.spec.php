@@ -14,7 +14,7 @@ describe(OAGC\Strategy\Factory\ScalarMap::class, function ()
 	});
 	it('creates map strategy with scalar item strategy using specified options', function ()
 	{
-		$options = ['type' => OAGC\Validator\Scalar::TYPE_INT];
+		$options = ['aaa' => 111];
 		$scalarStrategy = mock(DT\Strategy\StrategyInterface::class);
 		$strategyManager = mock(PM\PluginManagerInterface::class);
 		$strategyManager->shouldReceive('__invoke')->with(OAGC\Strategy\Factory\PluginManager::P_SCALAR, $options)->andReturn($scalarStrategy)->once();
@@ -30,7 +30,7 @@ describe(OAGC\Strategy\Factory\ScalarMap::class, function ()
 	it('creates map strategy with scalar item strategy using specified options and passing extract_std_class flag', function ()
 	{
 		$extractStdClass = true;
-		$options = ['type' => OAGC\Validator\Scalar::TYPE_INT, 'extract_std_class' => $extractStdClass];
+		$options = ['type' => OAGC\ScalarType::INT, 'extract_std_class' => $extractStdClass];
 		$scalarStrategy = mock(DT\Strategy\StrategyInterface::class);
 		$strategyManager = mock(PM\PluginManagerInterface::class);
 		$strategyManager->shouldReceive('__invoke')->with(OAGC\Strategy\Factory\PluginManager::P_SCALAR, $options)->andReturn($scalarStrategy)->once();
@@ -56,7 +56,7 @@ describe(OAGC\Strategy\Factory\ScalarMap::class, function ()
 
 		$factory = new OAGC\Strategy\Factory\ScalarMap();
 
-		$strategy = $factory($container, 'test', ['type' => OAGC\Validator\Scalar::TYPE_INT]);
+		$strategy = $factory($container, 'test', ['type' => OAGC\ScalarType::INT]);
 		$map = ['a' => 1, 'b' => 2, 'c' => 3];
 		expect($strategy->extract(new ArrayObject($map)))->toBe($map);
 	});
@@ -72,7 +72,7 @@ describe(OAGC\Strategy\Factory\ScalarMap::class, function ()
 
 		$factory = new OAGC\Strategy\Factory\ScalarMap();
 
-		$strategy = $factory($container, 'test', ['type' => OAGC\Validator\Scalar::TYPE_INT]);
+		$strategy = $factory($container, 'test', ['type' => OAGC\ScalarType::INT]);
 		$destination = new ArrayObject(['a' => 1, 'b' => 2, 'c' => 3]);
 		$source = ['b' => 4, 'd' => 5];
 		$strategy->hydrate($source, $destination);
@@ -90,7 +90,7 @@ describe(OAGC\Strategy\Factory\ScalarMap::class, function ()
 
 		$factory = new OAGC\Strategy\Factory\ScalarMap();
 
-		$strategy = $factory($container, 'test', ['type' => OAGC\Validator\Scalar::TYPE_INT]);
+		$strategy = $factory($container, 'test', ['type' => OAGC\ScalarType::INT]);
 		$destination = ['a' => 1, 'b' => 2, 'c' => 3];
 		$source = ['b' => 4, 'd' => 5];
 		$strategy->merge($source, $destination);

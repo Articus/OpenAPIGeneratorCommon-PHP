@@ -22,6 +22,7 @@ class PluginManager implements PM\ServiceFactoryInterface
 	public const P_OBJECT_MAP = 'ObjectMap';
 	public const P_QUERY_STRING_SCALAR = 'QueryStringScalar';
 	public const P_QUERY_STRING_SCALAR_ARRAY = 'QueryStringScalarArray';
+	public const P_QUERY_STRING_SCALAR_LIST = 'QueryStringScalarList';
 	public const P_SCALAR = 'Scalar';
 	public const P_SCALAR_LIST = 'ScalarList';
 	public const P_SCALAR_MAP = 'ScalarMap';
@@ -76,6 +77,7 @@ class PluginManager implements PM\ServiceFactoryInterface
 			self::P_OBJECT_MAP => new NoArgObjectMap(),
 			self::P_QUERY_STRING_SCALAR => new QueryStringScalar(),
 			self::P_QUERY_STRING_SCALAR_ARRAY => new QueryStringScalarArray(),
+			self::P_QUERY_STRING_SCALAR_LIST => new QueryStringScalarList(),
 			self::P_SCALAR => new PM\Factory\InvokablePlugin(Strategy\Scalar::class),
 			self::P_SCALAR_LIST => new ScalarList(),
 			self::P_SCALAR_MAP => new ScalarMap(),
@@ -92,6 +94,7 @@ class PluginManager implements PM\ServiceFactoryInterface
 			self::P_OBJECT_MAP => true,
 			self::P_QUERY_STRING_SCALAR => true,
 			self::P_QUERY_STRING_SCALAR_ARRAY => true,
+			self::P_QUERY_STRING_SCALAR_LIST => true,
 			self::P_SCALAR => true,
 			self::P_SCALAR_LIST => true,
 			self::P_SCALAR_MAP => true,

@@ -14,7 +14,7 @@ describe(OAGC\Strategy\Factory\ScalarList::class, function ()
 	});
 	it('creates list strategy with scalar item strategy using specified options', function ()
 	{
-		$options = ['type' => OAGC\Validator\Scalar::TYPE_INT];
+		$options = ['aaa' => 111];
 		$scalarStrategy = mock(DT\Strategy\StrategyInterface::class);
 		$strategyManager = mock(PM\PluginManagerInterface::class);
 		$strategyManager->shouldReceive('__invoke')->with(OAGC\Strategy\Factory\PluginManager::P_SCALAR, $options)->andReturn($scalarStrategy)->once();
@@ -39,13 +39,12 @@ describe(OAGC\Strategy\Factory\ScalarList::class, function ()
 
 		$factory = new OAGC\Strategy\Factory\ScalarList();
 
-		$strategy = $factory($container, 'test', ['type' => OAGC\Validator\Scalar::TYPE_INT]);
-		$list = [1, 2, 3];
+		$strategy = $factory($container, 'test', ['type' => OAGC\ScalarType::INT]);
 		expect($strategy->extract(new ArrayObject()))->toBe([]);
-		expect($strategy->extract(new ArrayObject($list)))->toBe($list);
-		expect($strategy->extract(new ArrayObject([3 => 1, 4 => 2, 5 => 3])))->toBe($list);
+		expect($strategy->extract(new ArrayObject([1, 2, 3])))->toBe([1, 2, 3]);
+		expect($strategy->extract(new ArrayObject([3 => 1, 4 => 2, 5 => 3])))->toBe([1, 2, 3]);
 	});
-	it('creates list strategy that hydrates to empty scalar array', function ()
+	it('creates list strategy that hydrates to empty list', function ()
 	{
 		$container = mock(ContainerInterface::class);
 		$container
@@ -57,12 +56,12 @@ describe(OAGC\Strategy\Factory\ScalarList::class, function ()
 
 		$factory = new OAGC\Strategy\Factory\ScalarList();
 
-		$strategy = $factory($container, 'test', ['type' => OAGC\Validator\Scalar::TYPE_INT]);
+		$strategy = $factory($container, 'test', ['type' => OAGC\ScalarType::INT]);
 		$destination = new ArrayObject();
 		$strategy->hydrate([4, 5], $destination);
 		expect($destination->getArrayCopy())->toBe([0 => 4, 1 => 5]);
 	});
-	it('creates list strategy that hydrates to scalar array with items', function ()
+	it('creates list strategy that hydrates to list with items', function ()
 	{
 		$container = mock(ContainerInterface::class);
 		$container
@@ -74,12 +73,12 @@ describe(OAGC\Strategy\Factory\ScalarList::class, function ()
 
 		$factory = new OAGC\Strategy\Factory\ScalarList();
 
-		$strategy = $factory($container, 'test', ['type' => OAGC\Validator\Scalar::TYPE_INT]);
+		$strategy = $factory($container, 'test', ['type' => OAGC\ScalarType::INT]);
 		$destination = new ArrayObject([1, 2, 3]);
 		$strategy->hydrate([4, 5], $destination);
 		expect($destination->getArrayCopy())->toBe([3 => 4, 4 => 5]);
 	});
-	it('creates list strategy that merges to empty scalar array', function ()
+	it('creates list strategy that merges to empty array', function ()
 	{
 		$container = mock(ContainerInterface::class);
 		$container
@@ -91,12 +90,12 @@ describe(OAGC\Strategy\Factory\ScalarList::class, function ()
 
 		$factory = new OAGC\Strategy\Factory\ScalarList();
 
-		$strategy = $factory($container, 'test', ['type' => OAGC\Validator\Scalar::TYPE_INT]);
+		$strategy = $factory($container, 'test', ['type' => OAGC\ScalarType::INT]);
 		$destination = [];
 		$strategy->merge([4, 5], $destination);
 		expect($destination)->toBe([0 => 4, 1 => 5]);
 	});
-	it('creates list strategy that merges to scalar array with items', function ()
+	it('creates list strategy that merges to array with items', function ()
 	{
 		$container = mock(ContainerInterface::class);
 		$container
@@ -108,7 +107,7 @@ describe(OAGC\Strategy\Factory\ScalarList::class, function ()
 
 		$factory = new OAGC\Strategy\Factory\ScalarList();
 
-		$strategy = $factory($container, 'test', ['type' => OAGC\Validator\Scalar::TYPE_INT]);
+		$strategy = $factory($container, 'test', ['type' => OAGC\ScalarType::INT]);
 		$destination = [1, 2, 3];
 		$strategy->merge([4, 5], $destination);
 		expect($destination)->toBe([0 => 4, 1 => 5]);

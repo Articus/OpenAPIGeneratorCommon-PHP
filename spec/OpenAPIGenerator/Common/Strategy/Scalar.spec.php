@@ -28,13 +28,13 @@ describe(OAGC\Strategy\Scalar::class, function ()
 		{
 			$value = mock();
 
-			$intStrategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_INT]);
+			$intStrategy = new OAGC\Strategy\Scalar(['type' => OAGC\ScalarType::INT]);
 			expect($intStrategy->extract($value))->toBe($value);
-			$floatStrategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_FLOAT]);
+			$floatStrategy = new OAGC\Strategy\Scalar(['type' => OAGC\ScalarType::FLOAT]);
 			expect($floatStrategy->extract($value))->toBe($value);
-			$boolStrategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_BOOL]);
+			$boolStrategy = new OAGC\Strategy\Scalar(['type' => OAGC\ScalarType::BOOL]);
 			expect($boolStrategy->extract($value))->toBe($value);
-			$stringStrategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_STRING]);
+			$stringStrategy = new OAGC\Strategy\Scalar(['type' => OAGC\ScalarType::STRING]);
 			expect($stringStrategy->extract($value))->toBe($value);
 		});
 	});
@@ -44,14 +44,14 @@ describe(OAGC\Strategy\Scalar::class, function ()
 		{
 			it('hydrates from null', function ()
 			{
-				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_INT]);
+				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\ScalarType::INT]);
 				$result = mock();
 				$strategy->hydrate(null, $result);
 				expect($result)->toBeNull();
 			});
 			it('hydrates from not null by casting to type', function ()
 			{
-				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_INT]);
+				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\ScalarType::INT]);
 				$result = mock();
 				$strategy->hydrate(0, $result);
 				expect($result)->toBe(0);
@@ -79,14 +79,14 @@ describe(OAGC\Strategy\Scalar::class, function ()
 		{
 			it('hydrates from null', function ()
 			{
-				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_FLOAT]);
+				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\ScalarType::FLOAT]);
 				$result = mock();
 				$strategy->hydrate(null, $result);
 				expect($result)->toBeNull();
 			});
 			it('hydrates from not null by casting to type', function ()
 			{
-				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_FLOAT]);
+				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\ScalarType::FLOAT]);
 				$result = mock();
 				$strategy->hydrate(0, $result);
 				expect($result)->toBe(0.0);
@@ -114,14 +114,14 @@ describe(OAGC\Strategy\Scalar::class, function ()
 		{
 			it('hydrates from null', function ()
 			{
-				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_BOOL]);
+				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\ScalarType::BOOL]);
 				$result = mock();
 				$strategy->hydrate(null, $result);
 				expect($result)->toBeNull();
 			});
 			it('hydrates from not null by casting to type', function ()
 			{
-				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_BOOL]);
+				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\ScalarType::BOOL]);
 				$result = mock();
 				$strategy->hydrate(0, $result);
 				expect($result)->toBe(false);
@@ -149,14 +149,14 @@ describe(OAGC\Strategy\Scalar::class, function ()
 		{
 			it('hydrates from null', function ()
 			{
-				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_STRING]);
+				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\ScalarType::STRING]);
 				$result = mock();
 				$strategy->hydrate(null, $result);
 				expect($result)->toBeNull();
 			});
 			it('hydrates from not null by casting to type', function ()
 			{
-				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_STRING]);
+				$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\ScalarType::STRING]);
 				$result = mock();
 				$strategy->hydrate(0, $result);
 				expect($result)->toBe('0');
@@ -187,7 +187,7 @@ describe(OAGC\Strategy\Scalar::class, function ()
 		{
 			$source = mock();
 			$destination = mock();
-			$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\Validator\Scalar::TYPE_INT]);
+			$strategy = new OAGC\Strategy\Scalar(['type' => OAGC\ScalarType::INT]);
 			$strategy->merge($source, $destination);
 			expect($destination)->toBe($source);
 		});

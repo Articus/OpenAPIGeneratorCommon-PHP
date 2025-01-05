@@ -38,7 +38,7 @@ describe(OAGC\Validator\Factory\QueryStringScalar::class, function ()
 		$container->shouldReceive('get')->with(DT\Options::DEFAULT_VALIDATOR_PLUGIN_MANAGER)->andReturn($manager)->once();
 
 		$factory = new OAGC\Validator\Factory\QueryStringScalar();
-		$obj = $factory($container, '', ['type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_BOOL]);
+		$obj = $factory($container, '', ['type' => OAGC\ScalarType::BOOL]);
 
 		$chain->shouldReceive('validate')->with(new IsSame(false))->andReturn([])->once();
 		expect($obj->validate('false'))->toBe([]);
@@ -55,7 +55,7 @@ describe(OAGC\Validator\Factory\QueryStringScalar::class, function ()
 			$container->shouldReceive('get')->with(DT\Options::DEFAULT_VALIDATOR_PLUGIN_MANAGER)->andReturn($manager)->once();
 
 			$factory = new OAGC\Validator\Factory\QueryStringScalar();
-			$obj = $factory($container, '', ['type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_BOOL, 'validators' => $links]);
+			$obj = $factory($container, '', ['type' => OAGC\ScalarType::BOOL, 'validators' => $links]);
 			$error = [
 				DT\Validator\SerializableValue::INVALID_INNER => [
 					OAGC\QueryStringScalarAware::ERROR_BOOL => 'Invalid query string parameter type: expecting bool.',
@@ -82,7 +82,7 @@ describe(OAGC\Validator\Factory\QueryStringScalar::class, function ()
 			$container->shouldReceive('get')->with(DT\Options::DEFAULT_VALIDATOR_PLUGIN_MANAGER)->andReturn($manager)->once();
 
 			$factory = new OAGC\Validator\Factory\QueryStringScalar();
-			$obj = $factory($container, '', ['type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_BOOL, 'validators' => $links]);
+			$obj = $factory($container, '', ['type' => OAGC\ScalarType::BOOL, 'validators' => $links]);
 
 			$error1 = ['a' => 1];
 			$chain->shouldReceive('validate')->with(new IsSame(false))->andReturn($error1)->once();
@@ -105,7 +105,7 @@ describe(OAGC\Validator\Factory\QueryStringScalar::class, function ()
 			$container->shouldReceive('get')->with(DT\Options::DEFAULT_VALIDATOR_PLUGIN_MANAGER)->andReturn($manager)->once();
 
 			$factory = new OAGC\Validator\Factory\QueryStringScalar();
-			$obj = $factory($container, '', ['type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT, 'validators' => $links]);
+			$obj = $factory($container, '', ['type' => OAGC\ScalarType::INT, 'validators' => $links]);
 			$error = [
 				DT\Validator\SerializableValue::INVALID_INNER => [
 					OAGC\QueryStringScalarAware::ERROR_INT => 'Invalid query string parameter type: expecting int.',
@@ -131,7 +131,7 @@ describe(OAGC\Validator\Factory\QueryStringScalar::class, function ()
 			$container->shouldReceive('get')->with(DT\Options::DEFAULT_VALIDATOR_PLUGIN_MANAGER)->andReturn($manager)->once();
 
 			$factory = new OAGC\Validator\Factory\QueryStringScalar();
-			$obj = $factory($container, '', ['type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_INT, 'validators' => $links]);
+			$obj = $factory($container, '', ['type' => OAGC\ScalarType::INT, 'validators' => $links]);
 
 			$error1 = ['a' => 1];
 			$chain->shouldReceive('validate')->with(new IsSame(0))->andReturn($error1)->once();
@@ -158,7 +158,7 @@ describe(OAGC\Validator\Factory\QueryStringScalar::class, function ()
 			$container->shouldReceive('get')->with(DT\Options::DEFAULT_VALIDATOR_PLUGIN_MANAGER)->andReturn($manager)->once();
 
 			$factory = new OAGC\Validator\Factory\QueryStringScalar();
-			$obj = $factory($container, '', ['type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_FLOAT, 'validators' => $links]);
+			$obj = $factory($container, '', ['type' => OAGC\ScalarType::FLOAT, 'validators' => $links]);
 			$error = [
 				DT\Validator\SerializableValue::INVALID_INNER => [
 					OAGC\QueryStringScalarAware::ERROR_FLOAT => 'Invalid query string parameter type: expecting float.',
@@ -179,7 +179,7 @@ describe(OAGC\Validator\Factory\QueryStringScalar::class, function ()
 			$container->shouldReceive('get')->with(DT\Options::DEFAULT_VALIDATOR_PLUGIN_MANAGER)->andReturn($manager)->once();
 
 			$factory = new OAGC\Validator\Factory\QueryStringScalar();
-			$obj = $factory($container, '', ['type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_FLOAT, 'validators' => $links]);
+			$obj = $factory($container, '', ['type' => OAGC\ScalarType::FLOAT, 'validators' => $links]);
 
 			$error1 = ['a' => 1];
 			$chain->shouldReceive('validate')->with(new IsSame(0.0))->andReturn($error1)->once();
@@ -226,7 +226,7 @@ describe(OAGC\Validator\Factory\QueryStringScalar::class, function ()
 			$container->shouldReceive('get')->with(DT\Options::DEFAULT_VALIDATOR_PLUGIN_MANAGER)->andReturn($manager)->once();
 
 			$factory = new OAGC\Validator\Factory\QueryStringScalar();
-			$obj = $factory($container, '', ['type' => OAGC\QueryStringScalarAware::SCALAR_TYPE_STRING, 'validators' => $links]);
+			$obj = $factory($container, '', ['type' => OAGC\ScalarType::STRING, 'validators' => $links]);
 
 			$error = ['a' => 1];
 			$chain->shouldReceive('validate')->with(new IsSame('abc'))->andReturn($error)->once();

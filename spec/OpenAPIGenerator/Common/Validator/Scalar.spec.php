@@ -23,7 +23,7 @@ describe(OAGC\Validator\Scalar::class, function ()
 	{
 		it('validates if value is integer', function ()
 		{
-			$obj = new OAGC\Validator\Scalar(['type' => OAGC\Validator\Scalar::TYPE_INT]);
+			$obj = new OAGC\Validator\Scalar(['type' => OAGC\ScalarType::INT]);
 			$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid scalar type: expecting int.'];
 
 			expect($obj->validate(null))->toBe([]);
@@ -54,7 +54,7 @@ describe(OAGC\Validator\Scalar::class, function ()
 		});
 		it('validates if value is float', function ()
 		{
-			$obj = new OAGC\Validator\Scalar(['type' => OAGC\Validator\Scalar::TYPE_FLOAT]);
+			$obj = new OAGC\Validator\Scalar(['type' => OAGC\ScalarType::FLOAT]);
 			$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid scalar type: expecting float.'];
 
 			expect($obj->validate(null))->toBe([]);
@@ -85,7 +85,7 @@ describe(OAGC\Validator\Scalar::class, function ()
 		});
 		it('validates if value is boolean', function ()
 		{
-			$obj = new OAGC\Validator\Scalar(['type' => OAGC\Validator\Scalar::TYPE_BOOL]);
+			$obj = new OAGC\Validator\Scalar(['type' => OAGC\ScalarType::BOOL]);
 			$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid scalar type: expecting bool.'];
 
 			expect($obj->validate(null))->toBe([]);
@@ -116,7 +116,7 @@ describe(OAGC\Validator\Scalar::class, function ()
 		});
 		it('validates if value is string', function ()
 		{
-			$obj = new OAGC\Validator\Scalar(['type' => OAGC\Validator\Scalar::TYPE_STRING]);
+			$obj = new OAGC\Validator\Scalar(['type' => OAGC\ScalarType::STRING]);
 			$error = [OAGC\Validator\Scalar::ERROR_INVALID_TYPE => 'Invalid scalar type: expecting string.'];
 
 			expect($obj->validate(null))->toBe([]);
